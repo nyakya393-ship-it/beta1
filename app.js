@@ -165,17 +165,23 @@ window.onload = () => {
 function saveBattle() {
 
   const data = {
-    battleType: battleType.value,
-    rule: rule.value,
-    stage: stage.value,
-    weapon: weapon.value,
-    result: result.value,
-    kill: Number(kill.value || 0),
-    assist: Number(assist.value || 0),
-    death: Number(death.value || 0),
-    paint: Number(paint.value || 0),
-    special: Number(special.value || 0)
+    battleType: document.getElementById("battleType").value,
+    rule: document.getElementById("rule").value,
+    stage: document.getElementById("stage").value,
+    weapon: document.getElementById("weapon").value,
+    result: document.getElementById("result").value,
+    kill: Number(document.getElementById("kill").value || 0),
+    assist: Number(document.getElementById("assist").value || 0),
+    death: Number(document.getElementById("death").value || 0),
+    paint: Number(document.getElementById("paint").value || 0),
+    special: Number(document.getElementById("special").value || 0)
   };
+
+  battles.push(data);
+  localStorage.setItem("battles", JSON.stringify(battles));
+
+  update();
+}
 
   battles.push(data);
   localStorage.setItem("battles", JSON.stringify(battles));
