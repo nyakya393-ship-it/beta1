@@ -1,12 +1,14 @@
 let battles = JSON.parse(localStorage.getItem("battles")) || [];
 
+// =====================
+// 武器フル版（省略なし）
+// =====================
 const weapons = [
-  // =====================
   // シューター
-  // =====================
-  "スプラシューター","スプラシューターコラボ","ヒーローシューター",
+  "スプラシューター","スプラシューターコラボ","ヒーローシューター","オーダーシューターレプリカ","オクタシューターレプリカ",
   "わかばシューター","もみじシューター",
-  ".52ガロン",".52ガロンデコ",".96ガロン",".96ガロンデコ",".96ガロン爪",
+  ".52ガロン",".52ガロンデコ",
+  ".96ガロン",".96ガロンデコ",".96ガロン爪",
   "プロモデラーMG","プロモデラーRG","プロモデラー彩",
   "N-ZAP85","N-ZAP89",
   "スペースシューター","スペースシューターコラボ",
@@ -18,9 +20,7 @@ const weapons = [
   "L3リールガン","L3リールガンD","L3リールガン箔",
   "H3リールガン","H3リールガンD","H3リールガンSNAK",
 
-  // =====================
   // ブラスター
-  // =====================
   "ホットブラスター","ホットブラスターカスタム","ホットブラスター艶",
   "ロングブラスター","ロングブラスターカスタム",
   "ラピッドブラスター","ラピッドブラスターデコ",
@@ -30,18 +30,14 @@ const weapons = [
   "クラッシュブラスター","クラッシュブラスターネオ",
   "S-BLAST92","S-BLAST91",
 
-  // =====================
   // ローラー
-  // =====================
   "スプラローラー","スプラローラーコラボ","オーダーローラーレプリカ",
   "カーボンローラー","カーボンローラーデコ","カーボンローラーANGL",
   "ダイナモローラー","ダイナモローラーテスラ","ダイナモローラー冥",
   "ワイドローラー","ワイドローラーコラボ","ワイドローラー惑",
   "ヴァリアブルローラー","ヴァリアブルローラーフォイル",
 
-  // =====================
   // チャージャー
-  // =====================
   "スプラチャージャー","スプラチャージャーコラボ","スプラチャージャーFRST",
   "スプラスコープ","スプラスコープコラボ","スプラスコープFRST",
   "スクイックリンα","スクイックリンβ",
@@ -51,9 +47,7 @@ const weapons = [
   "リッター4K","リッター4Kカスタム",
   "4Kスコープ","4Kスコープカスタム",
 
-  // =====================
   // スロッシャー
-  // =====================
   "バケットスロッシャー","バケットスロッシャーデコ",
   "ヒッセン","ヒッセンヒュー","ヒッセンASH",
   "モップリン","モップリンD","モップリン角",
@@ -61,9 +55,7 @@ const weapons = [
   "エクスプロッシャー","エクスプロッシャーカスタム",
   "オーバースロッシャー","オーバースロッシャーデコ",
 
-  // =====================
   // スピナー
-  // =====================
   "バレルスピナー","バレルスピナーデコ",
   "スプラスピナー","スプラスピナーコラボ","スプラスピナーPYTN",
   "イグザミナー","イグザミナーヒュー",
@@ -71,9 +63,7 @@ const weapons = [
   "ノーチラス47","ノーチラス79",
   "クーゲルシュライバー","クーゲルシュライバーヒュー",
 
-  // =====================
   // マニューバー
-  // =====================
   "スプラマニューバー","スプラマニューバーコラボ","スプラマニューバー耀",
   "デュアルスイーパー","デュアルスイーパーカスタム","デュアルスイーパー蹄",
   "スパッタリー","スパッタリーヒュー","スパッタリーOWL",
@@ -81,38 +71,33 @@ const weapons = [
   "ケルビン525","ケルビン525デコ",
   "ガエンFF","ガエンFFカスタム",
 
-  // =====================
   // シェルター
-  // =====================
   "パラシェルター","パラシェルターソレーラ",
   "24式張替傘・甲","24式張替傘・乙",
   "キャンピングシェルター","キャンピングシェルターソレーラ","キャンピングシェルターCREM",
   "スパイガジェット","スパイガジェットソレーラ","スパイガジェット繚",
 
-  // =====================
   // フデ
-  // =====================
   "ホクサイ","ホクサイヒュー","ホクサイ彗",
   "オーダーブラシレプリカ",
   "パブロ","パブロヒュー",
   "フィンセント","フィンセントヒュー","フィンセントBRNZ",
 
-  // =====================
   // ストリンガー
-  // =====================
   "トライストリンガー","トライストリンガーコラボ","トライストリンガー燈",
   "LACT-450","LACT-450デコ","LACT-450MILK",
   "フルイドV","フルイドVカスタム",
 
-  // =====================
   // ワイパー
-  // =====================
   "ドライブワイパー","ドライブワイパーデコ","ドライブワイパーRUST",
   "ジムワイパー","ジムワイパーヒュー","ジムワイパー封",
   "オーダーワイパーレプリカ",
   "デンタルワイパーミント","デンタルワイパースミ"
 ];
 
+// =====================
+// ステージ
+// =====================
 const stages = [
   "ユノハナ大渓谷","ゴンスイ地区","ヤガラ市場","マテガイ放水路",
   "ナンプラー遺跡","ナメロウ金属","クサヤ温泉","タラポートショッピングパーク",
@@ -124,29 +109,43 @@ const stages = [
 ];
 
 // =====================
-// DOM読み込み後に全部実行（重要）
+// スマホUI
 // =====================
 document.addEventListener("DOMContentLoaded", () => {
 
   const form = document.getElementById("battleForm");
   const list = document.getElementById("list");
-  const weaponSel = document.getElementById("weapon");
-  const stageSel = document.getElementById("stage");
 
-  // 武器セット
-  weapons.forEach(w => {
-    const opt = document.createElement("option");
-    opt.textContent = w;
-    opt.value = w;
-    weaponSel.appendChild(opt);
+  const weaponInput = document.getElementById("weaponSearch");
+  const weaponSelect = document.getElementById("weapon");
+  const stageSelect = document.getElementById("stage");
+
+  // ステージ
+  stages.forEach(s => {
+    const o = document.createElement("option");
+    o.value = s;
+    o.textContent = s;
+    stageSelect.appendChild(o);
   });
 
-  // ステージセット
-  stages.forEach(s => {
-    const opt = document.createElement("option");
-    opt.textContent = s;
-    opt.value = s;
-    stageSel.appendChild(opt);
+  // 武器表示（検索対応）
+  function renderWeapons(filter = "") {
+    weaponSelect.innerHTML = "";
+
+    weapons
+      .filter(w => w.includes(filter))
+      .forEach(w => {
+        const o = document.createElement("option");
+        o.value = w;
+        o.textContent = w;
+        weaponSelect.appendChild(o);
+      });
+  }
+
+  renderWeapons();
+
+  weaponInput.addEventListener("input", e => {
+    renderWeapons(e.target.value);
   });
 
   // 保存
@@ -154,10 +153,9 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     battles.push({
-      battleType: document.getElementById("battleType").value,
+      stage: stageSelect.value,
+      weapon: weaponSelect.value,
       rule: document.getElementById("rule").value,
-      stage: stageSel.value,
-      weapon: weaponSel.value,
       result: document.getElementById("result").value,
 
       kill: Number(document.getElementById("kill").value),
@@ -178,16 +176,16 @@ document.addEventListener("DOMContentLoaded", () => {
   function render() {
     list.innerHTML = "";
 
-    battles.forEach(b => {
+    battles.slice().reverse().forEach(b => {
       const div = document.createElement("div");
       div.className = "card";
 
       div.innerHTML = `
-        <b>${b.stage}</b> / ${b.weapon}<br>
+        <b>${b.weapon}</b><br>
+        ${b.stage}<br>
         ${b.rule} / ${b.result}<br>
         K:${b.kill} A:${b.assist} D:${b.death}<br>
-        ${b.paint}p SP:${b.special}<br>
-        ${b.memo || ""}
+        ${b.paint}p / SP:${b.special}
       `;
 
       list.appendChild(div);
