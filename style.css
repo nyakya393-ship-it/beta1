@@ -1,86 +1,106 @@
 body {
-  background: #0f1220;
-  color: #eaeaea;
+  margin: 0;
+  background: #0b0f14;
+  color: #e5e7eb;
   font-family: system-ui;
 }
 
-header {
-  padding: 10px;
-  text-align: center;
+.layout {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 200px;
+  background: #111827;
+  padding: 16px;
+}
+
+.sidebar h1 {
   color: #7cf7ff;
-  font-weight: bold;
 }
 
-.card {
-  background: linear-gradient(145deg, #1a1f3a, #12162a);
-  border: 1px solid #2a2f55;
-  border-radius: 14px;
-  padding: 14px;
-  margin: 10px;
+.main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
 }
 
-.dashboard {
+.top-stats {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 10px;
-  margin: 10px;
+  margin-bottom: 20px;
 }
 
-.stat {
-  text-align: center;
+.stat-box {
+  background: #111827;
+  padding: 10px;
+  border-radius: 10px;
 }
 
-.stat div {
-  font-size: 24px;
+.label {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.stat-box div:last-child {
   color: #7cf7ff;
-  font-weight: bold;
+  font-size: 20px;
 }
 
-/* フォーム */
+.panel {
+  background: #111827;
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
 label {
   display: block;
   margin-top: 10px;
   font-size: 12px;
-  color: #a9b4ff;
+  color: #9ca3af;
 }
 
 input, select {
   width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #2d3566;
-  background: #0c1022;
+  padding: 8px;
+  background: #0b0f14;
   color: white;
-  margin-top: 5px;
+  border: 1px solid #374151;
+  border-radius: 6px;
 }
 
-/* ボタン */
 button {
   width: 100%;
-  margin-top: 15px;
-  padding: 12px;
+  margin-top: 12px;
+  padding: 10px;
+  background: #7cf7ff;
   border: none;
-  border-radius: 12px;
-  background: linear-gradient(90deg, #7cf7ff, #6c7bff);
   font-weight: bold;
+  border-radius: 8px;
 }
 
-/* トースト */
+.card {
+  background: #0b0f14;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 8px;
+  border: 1px solid #1f2937;
+}
+
 #toast {
   position: fixed;
-  bottom: 30px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   background: #7cf7ff;
-  color: #0f1220;
-  padding: 10px 16px;
-  border-radius: 12px;
+  padding: 10px;
+  border-radius: 10px;
   opacity: 0;
-  transition: 0.3s;
-  pointer-events: none;
 }
 
 #toast.show {
   opacity: 1;
-  transform: translateX(-50%) translateY(-10px);
 }
