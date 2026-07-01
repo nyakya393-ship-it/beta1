@@ -48,3 +48,13 @@ button {
   padding: 10px;
   border-radius: 10px;
 }
+
+/* 🏆 ランク表示 */
+#rank {
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 8px;
+  background: #111827;
+  color: #22d3ee;
+  text-shadow: 0 0 8px rgba(34,211,238,0.5);
+}
