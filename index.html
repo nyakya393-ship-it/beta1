@@ -67,7 +67,7 @@
 
       </section>
 
-      <!-- 入力フォーム -->
+      <!-- 入力 -->
       <section class="card">
 
         <h2>戦績入力</h2>
@@ -82,9 +82,12 @@
             <option value="ガチアサリ">ガチアサリ</option>
           </select>
 
+          <!-- 勝敗（修正版） -->
           <select id="result">
             <option value="win">勝ち</option>
             <option value="lose">負け</option>
+            <option value="disconnect">通信切断（負け）</option>
+            <option value="invalid">無効試合</option>
           </select>
 
           <input id="weapon" placeholder="武器（例：スシ）">
@@ -98,12 +101,12 @@
 
           <label>
             <input type="checkbox" id="disconnect">
-            通信切断
+            通信切断フラグ
           </label>
 
           <label>
             <input type="checkbox" id="invalid">
-            無効試合
+            無効試合フラグ
           </label>
 
           <br><br>
