@@ -1,4 +1,3 @@
-console.log("JS動いてる");
 const form = document.getElementById("battleForm");
 const list = document.getElementById("list");
 
