@@ -1,101 +1,85 @@
-/* ===== リセット ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #0f0f0f;
-  color: #fff;
-  line-height: 1.6;
+  background: #0f1220;
+  color: #eaeaea;
+  font-family: system-ui, sans-serif;
 }
 
-/* ===== ヘッダー ===== */
-header {
-  background: #111;
-  padding: 20px;
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
+/* カード全体 */
+.card {
+  background: linear-gradient(145deg, #1a1f3a, #12162a);
+  border: 1px solid #2a2f55;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+/* 見出し */
+h2 {
+  color: #7cf7ff;
   letter-spacing: 1px;
 }
 
-/* ===== ナビゲーション ===== */
-nav {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  background: #111;
-  padding: 12px;
+/* フォーム要素 */
+label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: #a9b4ff;
 }
 
-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  transition: 0.2s;
-}
-
-nav a:hover {
-  color: #00e0ff;
-}
-
-/* ===== メイン ===== */
-main {
-  max-width: 1000px;
-  margin: 20px auto;
-  padding: 0 16px;
-}
-
-/* ===== セクション見出し ===== */
-h1, h2, h3 {
-  margin-bottom: 12px;
-}
-
-/* ===== カードUI ===== */
-.card {
-  background: #1a1a1a;
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-  transition: 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-}
-
-/* ===== ボタン ===== */
-button {
-  background: #00e0ff;
-  border: none;
-  padding: 10px 16px;
+/* 入力欄 */
+input, select {
+  width: 100%;
+  padding: 10px;
   border-radius: 10px;
+  border: 1px solid #2d3566;
+  background: #0c1022;
+  color: white;
+  outline: none;
+  transition: 0.2s;
+}
+
+/* フォーカス演出 */
+input:focus, select:focus {
+  border-color: #7cf7ff;
+  box-shadow: 0 0 10px rgba(124,247,255,0.4);
+}
+
+/* ボタン */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #7cf7ff, #6c7bff);
+  color: #0f1220;
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
 }
 
 button:hover {
-  background: #00b3cc;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(124,247,255,0.3);
 }
 
-/* ===== リンク ===== */
-a {
-  color: #00e0ff;
+/* ダッシュボード */
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
 
-a:hover {
-  opacity: 0.8;
-}
-
-/* ===== フッター ===== */
-footer {
+/* ステータスカード */
+.stat {
   text-align: center;
-  padding: 20px;
-  color: #aaa;
-  margin-top: 40px;
+}
+
+.stat div {
+  font-size: 26px;
+  font-weight: bold;
+  color: #7cf7ff;
 }
