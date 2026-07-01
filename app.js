@@ -1,7 +1,7 @@
 let battles = JSON.parse(localStorage.getItem("battles")) || [];
 
 /* =====================
- 武器（全部表示・固定）
+ 武器（完全表示）
 ===================== */
 const weapons = [
 
@@ -135,32 +135,37 @@ const stages = [
 ];
 
 /* =====================
- 初期化
+ 初期化（超重要ここ）
 ===================== */
 window.addEventListener("DOMContentLoaded", () => {
 
   const weaponSel = document.getElementById("weapon");
   const stageSel = document.getElementById("stage");
 
+  // 武器生成
   weapons.forEach(w => {
     const opt = document.createElement("option");
     opt.textContent = w;
+    opt.value = w;
     weaponSel.appendChild(opt);
   });
 
+  // ステージ生成
   stages.forEach(s => {
     const opt = document.createElement("option");
     opt.textContent = s;
+    opt.value = s;
     stageSel.appendChild(opt);
   });
 
-  document.getElementById("saveBtn").onclick = saveBattle;
+  // ボタン
+  document.getElementById("saveBtn").addEventListener("click", saveBattle);
 
   update();
 });
 
 /* =====================
- 保存
+ 保存処理（安全版）
 ===================== */
 function saveBattle() {
 
@@ -176,12 +181,6 @@ function saveBattle() {
     paint: Number(document.getElementById("paint").value || 0),
     special: Number(document.getElementById("special").value || 0)
   };
-
-  battles.push(data);
-  localStorage.setItem("battles", JSON.stringify(battles));
-
-  update();
-}
 
   battles.push(data);
   localStorage.setItem("battles", JSON.stringify(battles));
