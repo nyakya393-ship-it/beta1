@@ -1,137 +1,86 @@
 body {
-  margin: 0;
-  background: #0b0f14;
-  color: #e5e7eb;
+  background: #0f1220;
+  color: #eaeaea;
   font-family: system-ui;
 }
 
-/* レイアウト */
-.layout {
-  display: flex;
-  height: 100vh;
-}
-
-/* サイドバー */
-.sidebar {
-  width: 200px;
-  background: #111827;
-  padding: 16px;
-}
-
-.sidebar h1 {
+header {
+  padding: 10px;
+  text-align: center;
   color: #7cf7ff;
+  font-weight: bold;
 }
 
-.sidebar a {
-  display: block;
-  padding: 8px;
-  margin-top: 6px;
-  color: #9ca3af;
-  cursor: pointer;
+.card {
+  background: linear-gradient(145deg, #1a1f3a, #12162a);
+  border: 1px solid #2a2f55;
+  border-radius: 14px;
+  padding: 14px;
+  margin: 10px;
 }
 
-.sidebar a.active {
-  color: #7cf7ff;
-}
-
-/* メイン */
-.main {
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto;
-}
-
-/* 上部統計 */
-.top-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.stat-box {
-  background: #111827;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #1f2937;
-}
-
-.label {
-  font-size: 12px;
-  color: #9ca3af;
-}
-
-.value {
-  font-size: 22px;
-  color: #7cf7ff;
-}
-
-/* パネル */
-.panel {
-  background: #111827;
-  padding: 16px;
-  border-radius: 12px;
-  border: 1px solid #1f2937;
-  margin-bottom: 16px;
-}
-
-/* フォーム */
-.grid {
+.dashboard {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
+  margin: 10px;
 }
 
+.stat {
+  text-align: center;
+}
+
+.stat div {
+  font-size: 24px;
+  color: #7cf7ff;
+  font-weight: bold;
+}
+
+/* フォーム */
 label {
-  font-size: 12px;
-  color: #9ca3af;
   display: block;
   margin-top: 10px;
+  font-size: 12px;
+  color: #a9b4ff;
 }
 
 input, select {
   width: 100%;
-  padding: 8px;
-  background: #0b0f14;
-  border: 1px solid #374151;
-  color: white;
-  border-radius: 8px;
-}
-
-button {
-  margin-top: 12px;
-  width: 100%;
   padding: 10px;
-  background: #7cf7ff;
-  border: none;
   border-radius: 10px;
+  border: 1px solid #2d3566;
+  background: #0c1022;
+  color: white;
+  margin-top: 5px;
+}
+
+/* ボタン */
+button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #7cf7ff, #6c7bff);
   font-weight: bold;
-  cursor: pointer;
 }
 
-/* 戦績カード */
-.card {
-  background: #0b0f14;
-  border: 1px solid #1f2937;
-  padding: 10px;
-  margin-top: 8px;
-  border-radius: 8px;
-}
-
-/* toast */
+/* トースト */
 #toast {
   position: fixed;
-  bottom: 20px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   background: #7cf7ff;
-  color: #0b0f14;
-  padding: 10px 14px;
-  border-radius: 10px;
+  color: #0f1220;
+  padding: 10px 16px;
+  border-radius: 12px;
   opacity: 0;
   transition: 0.3s;
+  pointer-events: none;
 }
 
 #toast.show {
   opacity: 1;
+  transform: translateX(-50%) translateY(-10px);
 }
