@@ -6,32 +6,33 @@ document.addEventListener("DOMContentLoaded", () => {
   let battles = JSON.parse(localStorage.getItem("battles")) || [];
 
   // =====================
-  // 統計
+  // 統計（完全分離版）
   // =====================
   function updateStats() {
 
-    const valid = battles.filter(b => b.result !== "invalid");
+    const win = battles.filter(b => b.result === "win").length;
+    const lose = battles.filter(b => b.result === "lose").length;
 
-    const total = valid.length;
+    const disconnect = battles.filter(b => b.result === "disconnect").length;
+    const invalid = battles.filter(b => b.result === "invalid").length;
 
-    const win = valid.filter(b => b.result === "win").length;
+    const totalValid = win + lose;
 
-    const lose =
-      valid.filter(b => b.result === "lose").length +
-      valid.filter(b => b.result === "disconnect").length;
+    const rate = totalValid === 0 ? 0 : Math.round((win / totalValid) * 100);
 
-    const rate = total === 0 ? 0 : Math.round((win / total) * 100);
-
-    const kill = valid.reduce((s, b) => s + (b.kill || 0), 0);
-    const death = valid.reduce((s, b) => s + (b.death || 0), 0);
+    const kill = battles.reduce((s, b) => s + (b.kill || 0), 0);
+    const death = battles.reduce((s, b) => s + (b.death || 0), 0);
 
     const kd = death === 0 ? kill : (kill / death).toFixed(2);
 
-    document.getElementById("totalBattles").textContent = total;
+    document.getElementById("totalBattles").textContent = battles.length;
     document.getElementById("winCount").textContent = win;
     document.getElementById("loseCount").textContent = lose;
     document.getElementById("winRate").textContent = rate + "%";
     document.getElementById("kdRatio").textContent = kd;
+
+    // （任意で表示したければ追加可能）
+    // disconnect / invalid は統計外だけどカウントは保持
   }
 
   // =====================
@@ -43,10 +44,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     battles.forEach((b, i) => {
 
-      const label =
+      let label =
         b.result === "win" ? "勝ち" :
         b.result === "lose" ? "負け" :
-        b.result === "disconnect" ? "通信切断（負け）" :
+        b.result === "disconnect" ? "通信切断" :
         "無効試合";
 
       const div = document.createElement("div");
