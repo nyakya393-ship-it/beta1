@@ -235,9 +235,11 @@ function update() {
 function renderStats() {
 
   const wins = battles.filter(b => b.result === "win").length;
-  const loses = battles.length - wins;
-
-  const kills = battles.reduce((a,b)=>a+b.kill,0);
+　const loses = battles.filter(b => b.result === "lose").length;
+　const disconnects = battles.filter(b => b.result === "disconnect").length;
+　const invalids = battles.filter(b => b.result === "invalid").length;
+ 
+ const kills = battles.reduce((a,b)=>a+b.kill,0);
   const deaths = battles.reduce((a,b)=>a+b.death,0);
   const paint = battles.reduce((a,b)=>a+(b.paint||0),0);
 
