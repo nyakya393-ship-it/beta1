@@ -1,83 +1,194 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InkLog</title>
 
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1.0">
-
-<title>InkLog</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="layout">
+    <div class="layout">
 
-    <aside class="sidebar">
+        <!-- ===== サイドバー ===== -->
 
-        <h2>🦑 InkLog</h2>
+        <aside class="sidebar">
 
-        <nav>
-
-            <a href="#">🏠 ホーム</a>
-
-            <a href="#">📝 戦績入力</a>
-
-            <a href="#">📋 戦績一覧</a>
-
-            <a href="#">📊 統計</a>
-
-            <a href="#">🔫 ブキ</a>
-
-            <a href="#">🗺 ステージ</a>
-
-            <a href="#">⚙ 設定</a>
-
-        </nav>
-
-    </aside>
-
-    <main>
-
-        <header>
-
-            <div class="title">
-
-                InkLog Dashboard
-
+            <div class="logo">
+                <h1>🦑 InkLog</h1>
+                <p>Battle Tracker</p>
             </div>
 
-            <div class="icons">
+            <nav class="menu">
 
-　　　　　　　　<span>🔍</span>
+                <a class="active" href="#">
+                    <span>🏠</span>
+                    ホーム
+                </a>
 
-　　　　　　　　<span>⚙</span>
+                <a href="#">
+                    <span>📝</span>
+                    戦績入力
+                </a>
 
-　　　　　　　　<span>👤</span>
+                <a href="#">
+                    <span>📋</span>
+                    戦績一覧
+                </a>
 
-　　　　　　　　</div>
+                <a href="#">
+                    <span>📊</span>
+                    統計
+                </a>
 
-        </header>
+                <a href="#">
+                    <span>🔫</span>
+                    ブキ
+                </a>
 
-        <section class="card">
+                <a href="#">
+                    <span>🗺️</span>
+                    ステージ
+                </a>
 
-            <h1>👋 おかえり！</h1>
+                <a href="#">
+                    <span>⚙️</span>
+                    設定
+                </a>
 
-            <p>
+            </nav>
 
-                戦績入力から始めましょう！
+        </aside>
 
-            </p>
+        <!-- ===== メイン ===== -->
 
-        </section>
+        <main class="main">
 
-    </main>
+            <!-- ヘッダー -->
 
-</div>
+            <header class="header">
+
+                <div>
+                    <h2>InkLog Dashboard</h2>
+                    <p>Splatoon Battle Record</p>
+                </div>
+
+                <div class="header-icons">
+                    <button>🔍</button>
+                    <button>🔔</button>
+                    <button>👤</button>
+                </div>
+
+            </header>
+
+            <!-- ようこそ -->
+
+            <section class="welcome-card">
+
+                <h2>👋 おかえり！</h2>
+
+                <p>
+                    今日も最高のナワバリを塗りつくそう！
+                </p>
+
+            </section>
+
+            <!-- ダッシュボード -->
+
+            <section class="dashboard">
+
+                <div class="stat-card">
+
+                    <h3>試合数</h3>
+
+                    <div class="number">
+                        0
+                    </div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h3>勝率</h3>
+
+                    <div class="number">
+                        --%
+                    </div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h3>K/D</h3>
+
+                    <div class="number">
+                        --
+                    </div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h3>使用ブキ</h3>
+
+                    <div class="number">
+                        ---
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- クイックスタート -->
+
+            <section class="quick-action">
+
+                <h2>
+                    戦績を記録
+                </h2>
+
+                <p>
+                    まずは最初の1試合を保存してみましょう。
+                </p>
+
+                <button class="record-button">
+                    ＋ 戦績を記録する
+                </button>
+
+            </section>
+
+            <!-- 最近の戦績 -->
+
+            <section class="recent">
+
+                <h2>最近の戦績</h2>
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        🦑
+                    </div>
+
+                    <h3>
+                        まだ戦績はありません
+                    </h3>
+
+                    <p>
+                        「戦績を記録する」から追加してみましょう。
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
 
 </body>
 
