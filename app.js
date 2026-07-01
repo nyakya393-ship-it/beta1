@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let battles = JSON.parse(localStorage.getItem("battles")) || [];
 
   // =====================
-  // 統計（完全分離版）
+  // 統計（完全分離）
   // =====================
   function updateStats() {
 
@@ -30,13 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("loseCount").textContent = lose;
     document.getElementById("winRate").textContent = rate + "%";
     document.getElementById("kdRatio").textContent = kd;
-
-    // （任意で表示したければ追加可能）
-    // disconnect / invalid は統計外だけどカウントは保持
   }
 
   // =====================
-  // 表示
+  // 表示（完全修正版）
   // =====================
   function render() {
 
@@ -44,11 +41,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     battles.forEach((b, i) => {
 
-      let label =
-        b.result === "win" ? "勝ち" :
-        b.result === "lose" ? "負け" :
-        b.result === "disconnect" ? "通信切断" :
-        "無効試合";
+      let label = "";
+
+      if (b.result === "win") label = "勝ち";
+      else if (b.result === "lose") label = "負け";
+      else if (b.result === "disconnect") label = "通信切断";
+      else if (b.result === "invalid") label = "無効試合";
 
       const div = document.createElement("div");
       div.className = "card";
