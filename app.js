@@ -1,125 +1,127 @@
 let battles = JSON.parse(localStorage.getItem("battles")) || [];
 
 /* =====================
- 武器
+ 武器（完全版）
 ===================== */
 const weapons = [
-  // =====================
-  // シューター
-  // =====================
-  "スプラシューター","スプラシューターコラボ","スプラシューター煌",
-  "ヒーローシューターレプリカ","オーダーシューターレプリカ","オクタシューターレプリカ",
-  "わかばシューター","もみじシューター",
-  ".52ガロン",".52ガロンデコ",
-  ".96ガロン",".96ガロンデコ",".96ガロン爪",
-  "プロモデラーMG","プロモデラーRG","プロモデラー彩",
-  "N-ZAP85","N-ZAP89",
-  "スペースシューター","スペースシューターコラボ",
-  "ボールドマーカー","ボールドマーカーネオ",
-  "シャープマーカー","シャープマーカーネオ","シャープマーカーGECK",
-  "プライムシューター","プライムシューターコラボ","プライムシューターFRZN",
-  "ジェットスイーパー","ジェットスイーパーカスタム","ジェットスイーパーCOBR",
-  "ボトルガイザー","ボトルガイザーフォイル",
-  "L3リールガン","L3リールガンD","L3リールガン箔",
-  "H3リールガン","H3リールガンD","H3リールガンSNAK",
 
-  // =====================
-  // ブラスター
-  // =====================
-  "ホットブラスター","ホットブラスターカスタム","ホットブラスター艶",
-  "ロングブラスター","ロングブラスターカスタム",
-  "ラピッドブラスター","ラピッドブラスターデコ",
-  "Rブラスターエリート","Rブラスターエリートデコ","RブラスターエリートWNTR",
-  "ノヴァブラスター","ノヴァブラスターネオ",
-  "オーダーブラスターレプリカ",
-  "クラッシュブラスター","クラッシュブラスターネオ",
-  "S-BLAST92","S-BLAST91",
+/* =====================
+ シューター
+===================== */
+"スプラシューター","スプラシューターコラボ","スプラシューター煌",
+"ヒーローシューターレプリカ","オーダーシューターレプリカ","オクタシューターレプリカ",
+"わかばシューター","もみじシューター",
+".52ガロン",".52ガロンデコ",
+".96ガロン",".96ガロンデコ",".96ガロン爪",
+"プロモデラーMG","プロモデラーRG","プロモデラー彩",
+"N-ZAP85","N-ZAP89",
+"スペースシューター","スペースシューターコラボ",
+"ボールドマーカー","ボールドマーカーネオ",
+"シャープマーカー","シャープマーカーネオ","シャープマーカーGECK",
+"プライムシューター","プライムシューターコラボ","プライムシューターFRZN",
+"ジェットスイーパー","ジェットスイーパーカスタム","ジェットスイーパーCOBR",
+"ボトルガイザー","ボトルガイザーフォイル",
+"L3リールガン","L3リールガンD","L3リールガン箔",
+"H3リールガン","H3リールガンD","H3リールガンSNAK",
 
-  // =====================
-  // ローラー
-  // =====================
-  "スプラローラー","スプラローラーコラボ","オーダーローラーレプリカ",
-  "カーボンローラー","カーボンローラーデコ","カーボンローラーANGL",
-  "ダイナモローラー","ダイナモローラーテスラ","ダイナモローラー冥",
-  "ワイドローラー","ワイドローラーコラボ","ワイドローラー惑",
-  "ヴァリアブルローラー","ヴァリアブルローラーフォイル",
+/* =====================
+ ブラスター
+===================== */
+"ホットブラスター","ホットブラスターカスタム","ホットブラスター艶",
+"ロングブラスター","ロングブラスターカスタム",
+"ラピッドブラスター","ラピッドブラスターデコ",
+"Rブラスターエリート","Rブラスターエリートデコ","RブラスターエリートWNTR",
+"ノヴァブラスター","ノヴァブラスターネオ",
+"オーダーブラスターレプリカ",
+"クラッシュブラスター","クラッシュブラスターネオ",
+"S-BLAST92","S-BLAST91",
 
-  // =====================
-  // チャージャー
-  // =====================
-  "スプラチャージャー","スプラチャージャーコラボ","スプラチャージャーFRST",
-  "スプラスコープ","スプラスコープコラボ","スプラスコープFRST",
-  "スクイックリンα","スクイックリンβ",
-  "14式竹筒銃・甲","14式竹筒銃・乙",
-  "ソイチューバー","ソイチューバーカスタム",
-  "R-PEN/5H","R-PEN/5B",
-  "リッター4K","リッター4Kカスタム",
-  "4Kスコープ","4Kスコープカスタム",
+/* =====================
+ ローラー
+===================== */
+"スプラローラー","スプラローラーコラボ","オーダーローラーレプリカ",
+"カーボンローラー","カーボンローラーデコ","カーボンローラーANGL",
+"ダイナモローラー","ダイナモローラーテスラ","ダイナモローラー冥",
+"ワイドローラー","ワイドローラーコラボ","ワイドローラー惑",
+"ヴァリアブルローラー","ヴァリアブルローラーフォイル",
 
-  // =====================
-  // スロッシャー
-  // =====================
-  "バケットスロッシャー","バケットスロッシャーデコ",
-  "ヒッセン","ヒッセンヒュー","ヒッセンASH",
-  "モップリン","モップリンD","モップリン角",
-  "スクリュースロッシャー","スクリュースロッシャーネオ",
-  "エクスプロッシャー","エクスプロッシャーカスタム",
-  "オーバースロッシャー","オーバースロッシャーデコ",
+/* =====================
+ チャージャー
+===================== */
+"スプラチャージャー","スプラチャージャーコラボ","スプラチャージャーFRST",
+"スプラスコープ","スプラスコープコラボ","スプラスコープFRST",
+"スクイックリンα","スクイックリンβ",
+"14式竹筒銃・甲","14式竹筒銃・乙",
+"ソイチューバー","ソイチューバーカスタム",
+"R-PEN/5H","R-PEN/5B",
+"リッター4K","リッター4Kカスタム",
+"4Kスコープ","4Kスコープカスタム",
 
-  // =====================
-  // スピナー
-  // =====================
-  "バレルスピナー","バレルスピナーデコ",
-  "スプラスピナー","スプラスピナーコラボ","スプラスピナーPYTN",
-  "イグザミナー","イグザミナーヒュー",
-  "ハイドラント","ハイドラントカスタム","ハイドラント圧",
-  "ノーチラス47","ノーチラス79",
-  "クーゲルシュライバー","クーゲルシュライバーヒュー",
+/* =====================
+ スロッシャー
+===================== */
+"バケットスロッシャー","バケットスロッシャーデコ",
+"ヒッセン","ヒッセンヒュー","ヒッセンASH",
+"モップリン","モップリンD","モップリン角",
+"スクリュースロッシャー","スクリュースロッシャーネオ",
+"エクスプロッシャー","エクスプロッシャーカスタム",
+"オーバースロッシャー","オーバースロッシャーデコ",
 
-  // =====================
-  // マニューバー
-  // =====================
-  "スプラマニューバー","スプラマニューバーコラボ","スプラマニューバー耀",
-  "デュアルスイーパー","デュアルスイーパーカスタム","デュアルスイーパー蹄",
-  "スパッタリー","スパッタリーヒュー","スパッタリーOWL",
-  "クアッドホッパーブラック","クアッドホッパーホワイト",
-  "ケルビン525","ケルビン525デコ",
-  "ガエンFF","ガエンFFカスタム",
+/* =====================
+ スピナー
+===================== */
+"バレルスピナー","バレルスピナーデコ",
+"スプラスピナー","スプラスピナーコラボ","スプラスピナーPYTN",
+"イグザミナー","イグザミナーヒュー",
+"ハイドラント","ハイドラントカスタム","ハイドラント圧",
+"ノーチラス47","ノーチラス79",
+"クーゲルシュライバー","クーゲルシュライバーヒュー",
 
-  // =====================
-  // シェルター
-  // =====================
-  "パラシェルター","パラシェルターソレーラ",
-  "24式張替傘・甲","24式張替傘・乙",
-  "キャンピングシェルター","キャンピングシェルターソレーラ","キャンピングシェルターCREM",
-  "スパイガジェット","スパイガジェットソレーラ","スパイガジェット繚",
+/* =====================
+ マニューバー
+===================== */
+"スプラマニューバー","スプラマニューバーコラボ","スプラマニューバー耀",
+"デュアルスイーパー","デュアルスイーパーカスタム","デュアルスイーパー蹄",
+"スパッタリー","スパッタリーヒュー","スパッタリーOWL",
+"クアッドホッパーブラック","クアッドホッパーホワイト",
+"ケルビン525","ケルビン525デコ",
+"ガエンFF","ガエンFFカスタム",
 
-  // =====================
-  // フデ
-  // =====================
-  "ホクサイ","ホクサイヒュー","ホクサイ彗",
-  "オーダーブラシレプリカ",
-  "パブロ","パブロヒュー",
-  "フィンセント","フィンセントヒュー","フィンセントBRNZ",
+/* =====================
+ シェルター
+===================== */
+"パラシェルター","パラシェルターソレーラ",
+"24式張替傘・甲","24式張替傘・乙",
+"キャンピングシェルター","キャンピングシェルターソレーラ","キャンピングシェルターCREM",
+"スパイガジェット","スパイガジェットソレーラ","スパイガジェット繚",
 
-  // =====================
-  // ストリンガー
-  // =====================
-  "トライストリンガー","トライストリンガーコラボ","トライストリンガー燈",
-  "LACT-450","LACT-450デコ","LACT-450MILK",
-  "フルイドV","フルイドVカスタム",
+/* =====================
+ フデ
+===================== */
+"ホクサイ","ホクサイヒュー","ホクサイ彗",
+"オーダーブラシレプリカ",
+"パブロ","パブロヒュー",
+"フィンセント","フィンセントヒュー","フィンセントBRNZ",
 
-  // =====================
-  // ワイパー
-  // =====================
-  "ドライブワイパー","ドライブワイパーデコ","ドライブワイパーRUST",
-  "ジムワイパー","ジムワイパーヒュー","ジムワイパー封",
-  "オーダーワイパーレプリカ",
-  "デンタルワイパーミント","デンタルワイパースミ"
+/* =====================
+ ストリンガー
+===================== */
+"トライストリンガー","トライストリンガーコラボ","トライストリンガー燈",
+"LACT-450","LACT-450デコ","LACT-450MILK",
+"フルイドV","フルイドVカスタム",
+
+/* =====================
+ ワイパー
+===================== */
+"ドライブワイパー","ドライブワイパーデコ","ドライブワイパーRUST",
+"ジムワイパー","ジムワイパーヒュー","ジムワイパー封",
+"オーダーワイパーレプリカ",
+"デンタルワイパーミント","デンタルワイパースミ"
+
 ];
 
 /* =====================
- ステージ
+ ステージ（完全版）
 ===================== */
 const stages = [
   "ユノハナ大渓谷","ゴンズイ地区","ヤガラ市場","マテガイ放水路",
@@ -133,26 +135,37 @@ const stages = [
 ];
 
 /* =====================
- 初期化
+ 初期化（ここが重要）
 ===================== */
 window.addEventListener("DOMContentLoaded", () => {
 
   const weaponSel = document.getElementById("weapon");
   const stageSel = document.getElementById("stage");
 
+  if (!weaponSel || !stageSel) {
+    console.error("weapon or stage select not found");
+    return;
+  }
+
+  // 武器追加
   weapons.forEach(w => {
-    const o = document.createElement("option");
-    o.textContent = w;
-    weaponSel.appendChild(o);
+    const opt = document.createElement("option");
+    opt.value = w;
+    opt.textContent = w;
+    weaponSel.appendChild(opt);
   });
 
+  // ステージ追加
   stages.forEach(s => {
-    const o = document.createElement("option");
-    o.textContent = s;
-    stageSel.appendChild(o);
+    const opt = document.createElement("option");
+    opt.value = s;
+    opt.textContent = s;
+    stageSel.appendChild(opt);
   });
 
-  document.getElementById("saveBtn").onclick = saveBattle;
+  // ボタン
+  const btn = document.getElementById("saveBtn");
+  if (btn) btn.addEventListener("click", saveBattle);
 
   update();
 });
@@ -163,36 +176,22 @@ window.addEventListener("DOMContentLoaded", () => {
 function saveBattle() {
 
   const data = {
-    battleType: document.getElementById("battleType").value,
-    rule: document.getElementById("rule").value,
-    stage: document.getElementById("stage").value,
-    weapon: document.getElementById("weapon").value,
-    result: document.getElementById("result").value,
-    kill: Number(document.getElementById("kill").value || 0),
-    assist: Number(document.getElementById("assist").value || 0),
-    death: Number(document.getElementById("death").value || 0),
-    paint: Number(document.getElementById("paint").value || 0),
-    special: Number(document.getElementById("special").value || 0)
+    battleType: document.getElementById("battleType")?.value || "",
+    rule: document.getElementById("rule")?.value || "",
+    stage: document.getElementById("stage")?.value || "",
+    weapon: document.getElementById("weapon")?.value || "",
+    result: document.getElementById("result")?.value || "",
+    kill: Number(document.getElementById("kill")?.value || 0),
+    assist: Number(document.getElementById("assist")?.value || 0),
+    death: Number(document.getElementById("death")?.value || 0),
+    paint: Number(document.getElementById("paint")?.value || 0),
+    special: Number(document.getElementById("special")?.value || 0)
   };
 
   battles.push(data);
   localStorage.setItem("battles", JSON.stringify(battles));
 
   update();
-}
-
-/* =====================
- ランク計算
-===================== */
-function getRank(winRate, kd) {
-
-  const score = winRate * 0.6 + kd * 0.4;
-
-  if (score >= 80) return "S";
-  if (score >= 65) return "A";
-  if (score >= 50) return "B";
-  if (score >= 35) return "C";
-  return "D";
 }
 
 /* =====================
@@ -211,29 +210,20 @@ function renderStats() {
   const wins = battles.filter(b => b.result === "win").length;
   const loses = battles.filter(b => b.result === "lose").length;
 
-  const kills = battles.reduce((a,b)=>a+b.kill,0);
-  const deaths = battles.reduce((a,b)=>a+b.death,0);
+  const kills = battles.reduce((a,b)=>a+(b.kill||0),0);
+  const deaths = battles.reduce((a,b)=>a+(b.death||0),0);
   const paint = battles.reduce((a,b)=>a+(b.paint||0),0);
 
   const winRate = battles.length ? (wins / battles.length) * 100 : 0;
-  const kd = deaths ? (kills / deaths) : kills;
-
-  const rank = getRank(winRate, kd);
+  const kd = deaths ? kills / deaths : kills;
 
   document.getElementById("total").textContent = battles.length;
   document.getElementById("wins").textContent = wins;
   document.getElementById("loses").textContent = loses;
-
-  document.getElementById("rate").textContent =
-    Math.round(winRate) + "%";
-
-  document.getElementById("kd").textContent =
-    kd.toFixed ? kd.toFixed(2) : kd;
-
+  document.getElementById("rate").textContent = winRate.toFixed(1) + "%";
+  document.getElementById("kd").textContent = kd.toFixed(2);
   document.getElementById("avgPaint").textContent =
     battles.length ? (paint / battles.length).toFixed(1) : "0";
-
-  document.getElementById("rank").textContent = rank;
 }
 
 /* =====================
@@ -242,11 +232,13 @@ function renderStats() {
 function renderList() {
 
   const list = document.getElementById("list");
+  if (!list) return;
+
   list.innerHTML = "";
 
-  battles.slice().reverse().forEach((b, i) => {
+  battles.slice().reverse().forEach((b,i) => {
 
-    const index = battles.length - 1 - i;
+    const idx = battles.length - 1 - i;
 
     const div = document.createElement("div");
     div.className = "card";
@@ -256,8 +248,8 @@ function renderList() {
       ${b.stage}<br>
       ${b.rule} / ${b.result}<br>
       K:${b.kill} A:${b.assist} D:${b.death}<br>
-      ${b.paint}p SP:${b.special}<br><br>
-      <button onclick="deleteBattle(${index})">削除</button>
+      ${b.paint}p SP:${b.special}<br>
+      <button onclick="deleteBattle(${idx})">削除</button>
     `;
 
     list.appendChild(div);
@@ -268,7 +260,7 @@ function renderList() {
  削除
 ===================== */
 function deleteBattle(i) {
-  battles.splice(i, 1);
+  battles.splice(i,1);
   localStorage.setItem("battles", JSON.stringify(battles));
   update();
 }
