@@ -5,9 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Battle Log</title>
 
-<!-- 🎨 splatoon風フォント -->
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -26,21 +24,6 @@
   </div>
 </header>
 
-<!-- フィルター -->
-<section class="filter">
-  <select id="filterRule">
-    <option value="">全部ルール</option>
-    <option>ナワバリバトル</option>
-    <option>ガチエリア</option>
-    <option>ガチヤグラ</option>
-    <option>ガチホコ</option>
-    <option>ガチアサリ</option>
-  </select>
-
-  <select id="filterWeapon"></select>
-</section>
-
-<!-- 入力 -->
 <section class="form">
 
   <select id="battleType">
@@ -64,16 +47,14 @@
   </select>
 
   <select id="stage"></select>
-
-  <input id="weaponSearch" placeholder="武器検索">
   <select id="weapon"></select>
 
   <select id="result">
-  <option value="win">勝ち</option>
-  <option value="lose">負け</option>
-  <option value="disconnect">通信切断</option>
-  <option value="invalid">無効試合</option>
-</select>
+    <option value="win">勝ち</option>
+    <option value="lose">負け</option>
+    <option value="disconnect">通信切断</option>
+    <option value="invalid">無効試合</option>
+  </select>
 
   <input id="kill" type="number" placeholder="キル">
   <input id="assist" type="number" placeholder="アシスト">
@@ -85,7 +66,6 @@
 
 </section>
 
-<!-- 一覧 -->
 <section id="list"></section>
 
 <script src="app.js"></script>
