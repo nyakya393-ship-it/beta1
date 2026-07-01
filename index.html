@@ -4,14 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>InkLog v2 FULL</title>
+  <title>InkLog v2.1</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
-  InkLog v2 FULL
+  InkLog v2.1
 </header>
 
 <main>
@@ -41,18 +41,16 @@
 
   </div>
 
-  <!-- 入力 -->
+  <!-- 入力フォーム -->
   <div class="card">
     <h2>戦績入力</h2>
 
     <form id="battleForm">
 
-      <label>武器</label><br>
+      <label>武器</label>
       <select id="weapon"></select>
 
-      <br><br>
-
-      <label>ルール</label><br>
+      <label>ルール</label>
       <select id="rule">
         <option>ナワバリ</option>
         <option>ガチエリア</option>
@@ -61,9 +59,7 @@
         <option>ガチアサリ</option>
       </select>
 
-      <br><br>
-
-      <label>勝敗</label><br>
+      <label>勝敗</label>
       <select id="result">
         <option value="win">勝ち</option>
         <option value="lose">負け</option>
@@ -71,22 +67,14 @@
         <option value="invalid">無効試合</option>
       </select>
 
-      <br><br>
-
       <label>キル</label>
       <input id="kill" type="number">
 
-      <br><br>
-      
       <label>デス</label>
       <input id="death" type="number">
 
-      <br><br>
-
-      <label>メモ</label><br>
+      <label>メモ</label>
       <input id="memo" type="text">
-
-      <br><br>
 
       <button type="submit">保存</button>
 
@@ -106,6 +94,9 @@
   </div>
 
 </main>
+
+<!-- トースト -->
+<div id="toast">保存しました！</div>
 
 <script src="app.js"></script>
 
