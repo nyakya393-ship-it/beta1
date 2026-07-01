@@ -1,35 +1,49 @@
 body {
   background: #0f1220;
   color: #eaeaea;
-  font-family: system-ui, sans-serif;
+  font-family: system-ui;
 }
 
-/* カード全体 */
+header {
+  padding: 10px;
+  text-align: center;
+  color: #7cf7ff;
+  font-weight: bold;
+}
+
 .card {
   background: linear-gradient(145deg, #1a1f3a, #12162a);
   border: 1px solid #2a2f55;
   border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  padding: 14px;
+  margin: 10px;
 }
 
-/* 見出し */
-h2 {
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 10px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat div {
+  font-size: 24px;
   color: #7cf7ff;
-  letter-spacing: 1px;
+  font-weight: bold;
 }
 
-/* フォーム要素 */
+/* フォーム */
 label {
   display: block;
   margin-top: 10px;
-  margin-bottom: 4px;
-  font-size: 13px;
+  font-size: 12px;
   color: #a9b4ff;
 }
 
-/* 入力欄 */
 input, select {
   width: 100%;
   padding: 10px;
@@ -37,49 +51,36 @@ input, select {
   border: 1px solid #2d3566;
   background: #0c1022;
   color: white;
-  outline: none;
-  transition: 0.2s;
-}
-
-/* フォーカス演出 */
-input:focus, select:focus {
-  border-color: #7cf7ff;
-  box-shadow: 0 0 10px rgba(124,247,255,0.4);
+  margin-top: 5px;
 }
 
 /* ボタン */
 button {
   width: 100%;
-  padding: 12px;
   margin-top: 15px;
+  padding: 12px;
   border: none;
   border-radius: 12px;
   background: linear-gradient(90deg, #7cf7ff, #6c7bff);
+  font-weight: bold;
+}
+
+/* トースト */
+#toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #7cf7ff;
   color: #0f1220;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.2s;
+  padding: 10px 16px;
+  border-radius: 12px;
+  opacity: 0;
+  transition: 0.3s;
+  pointer-events: none;
 }
 
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(124,247,255,0.3);
-}
-
-/* ダッシュボード */
-.dashboard {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-/* ステータスカード */
-.stat {
-  text-align: center;
-}
-
-.stat div {
-  font-size: 26px;
-  font-weight: bold;
-  color: #7cf7ff;
+#toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-10px);
 }
