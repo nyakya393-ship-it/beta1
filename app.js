@@ -137,27 +137,27 @@ const stages = [
 /* =====================
  初期化
 ===================== */
-window.onload = () => {
+window.addEventListener("DOMContentLoaded", () => {
 
   const weaponSel = document.getElementById("weapon");
   const stageSel = document.getElementById("stage");
 
   weapons.forEach(w => {
-    const o = document.createElement("option");
-    o.textContent = w;
-    weaponSel.appendChild(o);
+    const opt = document.createElement("option");
+    opt.textContent = w;
+    weaponSel.appendChild(opt);
   });
 
   stages.forEach(s => {
-    const o = document.createElement("option");
-    o.textContent = s;
-    stageSel.appendChild(o);
+    const opt = document.createElement("option");
+    opt.textContent = s;
+    stageSel.appendChild(opt);
   });
 
   document.getElementById("saveBtn").onclick = saveBattle;
 
   update();
-};
+});
 
 /* =====================
  保存
