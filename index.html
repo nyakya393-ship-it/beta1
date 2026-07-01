@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>InkLog v0.6.0</title>
+  <title>InkLog v0.7.0</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -67,7 +67,7 @@
 
       </section>
 
-      <!-- 入力 -->
+      <!-- 入力フォーム -->
       <section class="card">
 
         <h2>戦績入力</h2>
@@ -87,10 +87,26 @@
             <option value="lose">負け</option>
           </select>
 
-          <input id="memo" placeholder="メモ">
+          <input id="weapon" placeholder="武器（例：スシ）">
 
           <input id="kill" type="number" min="0" value="0" placeholder="キル">
           <input id="death" type="number" min="0" value="0" placeholder="デス">
+
+          <input id="count" type="number" placeholder="カウント">
+
+          <input id="memo" placeholder="メモ">
+
+          <label>
+            <input type="checkbox" id="disconnect">
+            通信切断
+          </label>
+
+          <label>
+            <input type="checkbox" id="invalid">
+            無効試合
+          </label>
+
+          <br><br>
 
           <button type="submit">保存</button>
 
