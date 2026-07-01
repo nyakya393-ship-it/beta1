@@ -1,21 +1,12 @@
 // =====================
-// ストレージ
+// データ
 // =====================
 let battles = JSON.parse(localStorage.getItem("battles")) || [];
 
 // =====================
-// DOM
-// =====================
-const form = document.getElementById("battleForm");
-const list = document.getElementById("list");
-const weaponSel = document.getElementById("weapon");
-const stageSel = document.getElementById("stage");
-
-// =====================
-// 武器（完全版）
+// 武器
 // =====================
 const weapons = [
-  // シューター
   "スプラシューター","スプラシューターコラボ","ヒーローシューター",
   "わかばシューター","もみじシューター",
   ".52ガロン",".52ガロンデコ",".96ガロン",".96ガロンデコ",".96ガロン爪",
@@ -30,79 +21,13 @@ const weapons = [
   "L3リールガン","L3リールガンD","L3リールガン箔",
   "H3リールガン","H3リールガンD","H3リールガンSNAK",
 
-  // ブラスター
-  "ホットブラスター","ホットブラスターカスタム","ホットブラスター艶",
-  "ロングブラスター","ロングブラスターカスタム",
-  "ラピッドブラスター","ラピッドブラスターデコ",
-  "Rブラスターエリート","Rブラスターエリートデコ","RブラスターエリートWNTR",
-  "ノヴァブラスター","ノヴァブラスターネオ",
-  "オーダーブラスターレプリカ",
-  "クラッシュブラスター","クラッシュブラスターネオ",
-  "S-BLAST92","S-BLAST91",
-
-  // ローラー
-  "スプラローラー","スプラローラーコラボ","オーダーローラーレプリカ",
-  "カーボンローラー","カーボンローラーデコ","カーボンローラーANGL",
-  "ダイナモローラー","ダイナモローラーテスラ","ダイナモローラー冥",
-  "ワイドローラー","ワイドローラーコラボ","ワイドローラー惑",
-  "ヴァリアブルローラー","ヴァリアブルローラーフォイル",
-
-  // チャージャー
-  "スプラチャージャー","スプラチャージャーコラボ","スプラチャージャーFRST",
-  "スプラスコープ","スプラスコープコラボ","スプラスコープFRST",
-  "スクイックリンα","スクイックリンβ",
-  "14式竹筒銃・甲","14式竹筒銃・乙",
-  "ソイチューバー","ソイチューバーカスタム",
-  "R-PEN/5H","R-PEN/5B",
-  "リッター4K","リッター4Kカスタム",
-  "4Kスコープ","4Kスコープカスタム",
-
-  // スロッシャー
-  "バケットスロッシャー","バケットスロッシャーデコ",
-  "ヒッセン","ヒッセンヒュー","ヒッセンASH",
-  "モップリン","モップリンD","モップリン角",
-  "スクリュースロッシャー","スクリュースロッシャーネオ",
-  "エクスプロッシャー","エクスプロッシャーカスタム",
-  "オーバースロッシャー","オーバースロッシャーデコ",
-
-  // スピナー
-  "バレルスピナー","バレルスピナーデコ",
-  "スプラスピナー","スプラスピナーコラボ","スプラスピナーPYTN",
-  "イグザミナー","イグザミナーヒュー",
-  "ハイドラント","ハイドラントカスタム","ハイドラント圧",
-  "ノーチラス47","ノーチラス79",
-  "クーゲルシュライバー","クーゲルシュライバーヒュー",
-
-  // マニューバー
-  "スプラマニューバー","スプラマニューバーコラボ","スプラマニューバー耀",
-  "デュアルスイーパー","デュアルスイーパーカスタム","デュアルスイーパー蹄",
-  "スパッタリー","スパッタリーヒュー","スパッタリーOWL",
-  "クアッドホッパーブラック","クアッドホッパーホワイト",
-  "ケルビン525","ケルビン525デコ",
-  "ガエンFF","ガエンFFカスタム",
-
-  // シェルター
-  "パラシェルター","パラシェルターソレーラ",
-  "24式張替傘・甲","24式張替傘・乙",
-  "キャンピングシェルター","キャンピングシェルターソレーラ","キャンピングシェルターCREM",
-  "スパイガジェット","スパイガジェットソレーラ","スパイガジェット繚",
-
-  // フデ
-  "ホクサイ","ホクサイヒュー","ホクサイ彗",
-  "オーダーブラシレプリカ",
-  "パブロ","パブロヒュー",
-  "フィンセント","フィンセントヒュー","フィンセントBRNZ",
-
-  // ストリンガー
-  "トライストリンガー","トライストリンガーコラボ","トライストリンガー燈",
-  "LACT-450","LACT-450デコ","LACT-450MILK",
-  "フルイドV","フルイドVカスタム",
-
-  // ワイパー
-  "ドライブワイパー","ドライブワイパーデコ","ドライブワイパーRUST",
-  "ジムワイパー","ジムワイパーヒュー","ジムワイパー封",
-  "オーダーワイパーレプリカ",
-  "デンタルワイパーミント","デンタルワイパースミ"
+  "ホットブラスター","ノヴァブラスター","オーダーブラスターレプリカ",
+  "スプラローラー","カーボンローラー","オーダーローラーレプリカ",
+  "スプラチャージャー","リッター4K",
+  "バレルスピナー","ハイドラント",
+  "スプラマニューバー","クアッドホッパー",
+  "ホクサイ","パブロ",
+  "トライストリンガー","ドライブワイパー"
 ];
 
 // =====================
@@ -111,27 +36,45 @@ const weapons = [
 const stages = [
   "ユノハナ大渓谷","ゴンスイ地区","ヤガラ市場","マテガイ放水路",
   "ナンプラー遺跡","ナメロウ金属","クサヤ温泉","タラポート",
-  "ヒラメが丘","マサバ","キンメダイ","マヒマヒ",
-  "海女美","チョウザメ","ザトウ","スメーシー",
-  "コンブ","マンタ","タカアシ","オヒョウ",
-  "バイガイ","ネギトロ","カジキ","リュウグウ","デカライン"
+  "ヒラメが丘団地","マサバ海峡大橋","キンメダイ美術館","マヒマヒリゾート",
+  "海女美術大学","チョウザメ造船","ザトウマーケット","スメーシーワールド",
+  "コンブトラック","マンタマリア号","タカアシ経済特区","オヒョウ海運",
+  "バイガイ亭","ネギトロ炭鉱","カジキ空港","リュウグウターミナル","デカライン高架下"
 ];
 
 // =====================
-// 初期化
+// DOM
 // =====================
-weapons.forEach(w => {
-  const o = document.createElement("option");
-  o.textContent = w;
-  o.value = w;
-  weaponSel.appendChild(o);
-});
+const form = document.getElementById("battleForm");
+const list = document.getElementById("list");
 
-stages.forEach(s => {
-  const o = document.createElement("option");
-  o.textContent = s;
-  o.value = s;
-  stageSel.appendChild(o);
+let weaponSel, stageSel;
+
+// =====================
+// 初期化（ここが重要）
+// =====================
+document.addEventListener("DOMContentLoaded", () => {
+
+  weaponSel = document.getElementById("weapon");
+  stageSel = document.getElementById("stage");
+
+  // 武器セット
+  weapons.forEach(w => {
+    const o = document.createElement("option");
+    o.textContent = w;
+    o.value = w;
+    weaponSel.appendChild(o);
+  });
+
+  // ステージセット
+  stages.forEach(s => {
+    const o = document.createElement("option");
+    o.textContent = s;
+    o.value = s;
+    stageSel.appendChild(o);
+  });
+
+  render();
 });
 
 // =====================
@@ -147,11 +90,11 @@ form.addEventListener("submit", e => {
     weapon: weaponSel.value,
     result: document.getElementById("result").value,
 
-    kill: +document.getElementById("kill").value,
-    assist: +document.getElementById("assist").value,
-    death: +document.getElementById("death").value,
-    paint: +document.getElementById("paint").value,
-    special: +document.getElementById("special").value,
+    kill: Number(document.getElementById("kill").value),
+    assist: Number(document.getElementById("assist").value),
+    death: Number(document.getElementById("death").value),
+    paint: Number(document.getElementById("paint").value),
+    special: Number(document.getElementById("special").value),
 
     memo: document.getElementById("memo").value
   });
@@ -177,7 +120,7 @@ function render() {
       <b>${b.stage}</b> / ${b.weapon}<br>
       ${b.rule} / ${b.result}<br>
       K:${b.kill} A:${b.assist} D:${b.death}<br>
-      ${b.paint}p / SP:${b.special}<br>
+      ${b.paint}p SP:${b.special}<br>
       ${b.memo || ""}
     `;
 
@@ -216,10 +159,5 @@ function toast(text) {
   const t = document.getElementById("toast");
   t.textContent = text;
   t.classList.add("show");
-  setTimeout(()=>t.classList.remove("show"),1200);
+  setTimeout(() => t.classList.remove("show"), 1200);
 }
-
-// =====================
-// 初回描画
-// =====================
-render();
