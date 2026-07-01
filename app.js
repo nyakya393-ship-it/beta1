@@ -239,7 +239,9 @@ function renderList() {
   const list = document.getElementById("list");
   list.innerHTML = "";
 
-  battles.slice().reverse().forEach(b => {
+  battles.slice().reverse().forEach((b, index) => {
+
+    const realIndex = battles.length - 1 - index;
 
     const div = document.createElement("div");
     div.className = "card";
@@ -249,7 +251,9 @@ function renderList() {
       ${b.stage}<br>
       ${b.rule} / ${b.result}<br>
       K:${b.kill} A:${b.assist} D:${b.death}<br>
-      ${b.paint}p SP:${b.special}
+      ${b.paint}p SP:${b.special}<br><br>
+
+      <button onclick="deleteBattle(${realIndex})">削除</button>
     `;
 
     list.appendChild(div);
