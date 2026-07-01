@@ -4,97 +4,106 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>InkLog v0.8</title>
-
+  <title>InkLog v2 FULL</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="layout">
+<header>
+  InkLog v2 FULL
+</header>
 
-  <aside class="sidebar">
-    <div class="logo">
-      <h1>🦑 InkLog</h1>
-      <p>Battle Tracker</p>
+<main>
+
+  <!-- ダッシュボード -->
+  <div class="dashboard">
+
+    <div class="card stat">
+      <h3>総試合数</h3>
+      <div id="totalBattles">0</div>
     </div>
-  </aside>
 
-  <main class="main">
+    <div class="card stat">
+      <h3>勝率</h3>
+      <div id="winRate">0%</div>
+    </div>
 
-    <!-- 統計 -->
-    <section class="dashboard">
+    <div class="card stat">
+      <h3>勝ち</h3>
+      <div id="wins">0</div>
+    </div>
 
-      <div class="stat-card">
-        <h3>試合数</h3>
-        <div class="number" id="totalBattles">0</div>
-      </div>
+    <div class="card stat">
+      <h3>負け</h3>
+      <div id="loses">0</div>
+    </div>
 
-      <div class="stat-card">
-        <h3>勝ち</h3>
-        <div class="number" id="winCount">0</div>
-      </div>
+  </div>
 
-      <div class="stat-card">
-        <h3>負け</h3>
-        <div class="number" id="loseCount">0</div>
-      </div>
+  <!-- 入力 -->
+  <div class="card">
+    <h2>戦績入力</h2>
 
-      <div class="stat-card">
-        <h3>勝率</h3>
-        <div class="number" id="winRate">--%</div>
-      </div>
+    <form id="battleForm">
 
-      <div class="stat-card">
-        <h3>平均K/D</h3>
-        <div class="number" id="kdRatio">--</div>
-      </div>
+      <label>武器</label><br>
+      <select id="weapon"></select>
 
-    </section>
+      <br><br>
 
-    <!-- 入力 -->
-    <section class="card">
+      <label>ルール</label><br>
+      <select id="rule">
+        <option>ナワバリ</option>
+        <option>ガチエリア</option>
+        <option>ガチヤグラ</option>
+        <option>ガチホコ</option>
+        <option>ガチアサリ</option>
+      </select>
 
-      <h2>戦績入力</h2>
+      <br><br>
 
-      <form id="battleForm">
+      <label>勝敗</label><br>
+      <select id="result">
+        <option value="win">勝ち</option>
+        <option value="lose">負け</option>
+        <option value="disconnect">通信切断</option>
+        <option value="invalid">無効試合</option>
+      </select>
 
-        <select id="rule">
-          <option>ナワバリ</option>
-          <option>ガチエリア</option>
-          <option>ガチヤグラ</option>
-          <option>ガチホコ</option>
-          <option>ガチアサリ</option>
-        </select>
+      <br><br>
 
-        <select id="result">
-          <option value="win">勝ち</option>
-          <option value="lose">負け</option>
-          <option value="disconnect">通信切断</option>
-          <option value="invalid">無効試合</option>
-        </select>
+      <label>キル</label>
+      <input id="kill" type="number">
 
-        <input id="weapon" placeholder="武器">
-        <input id="kill" type="number" value="0" placeholder="キル">
-        <input id="death" type="number" value="0" placeholder="デス">
-        <input id="count" type="number" placeholder="カウント">
-        <input id="memo" placeholder="メモ">
+      <label>デス</label>
+      <input id="death" type="number">
 
-        <button type="submit">保存</button>
+      <br><br>
 
-      </form>
+      <label>メモ</label><br>
+      <input id="memo" type="text">
 
-    </section>
+      <br><br>
 
-    <!-- 一覧 -->
-    <section class="card">
-      <h2>戦績一覧</h2>
-      <div id="list"></div>
-    </section>
+      <button type="submit">保存</button>
 
-  </main>
+    </form>
+  </div>
 
-</div>
+  <!-- グラフ -->
+  <div class="card">
+    <h2>勝率グラフ</h2>
+    <canvas id="winChart" width="300" height="300"></canvas>
+  </div>
+
+  <!-- 一覧 -->
+  <div class="card">
+    <h2>戦績一覧</h2>
+    <div id="list"></div>
+  </div>
+
+</main>
 
 <script src="app.js"></script>
 
