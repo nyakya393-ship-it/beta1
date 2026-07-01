@@ -155,6 +155,45 @@ window.onload = () => {
 
   document.getElementById("saveBtn").onclick = saveBattle;
 
+  /* ⭐武器検索 */
+  const weaponSearch = document.getElementById("weaponSearch");
+
+  weaponSearch.addEventListener("input", () => {
+
+    const keyword = weaponSearch.value.toLowerCase();
+
+    const filtered = weapons.filter(w =>
+      w.toLowerCase().includes(keyword)
+    );
+
+    weaponSel.innerHTML = "";
+
+    filtered.forEach(w => {
+      const o = document.createElement("option");
+      o.textContent = w;
+      weaponSel.appendChild(o);
+    });
+  });
+
+  update();
+};
+  const weaponSel = document.getElementById("weapon");
+  const stageSel = document.getElementById("stage");
+
+  weapons.forEach(w => {
+    const o = document.createElement("option");
+    o.textContent = w;
+    weaponSel.appendChild(o);
+  });
+
+  stages.forEach(s => {
+    const o = document.createElement("option");
+    o.textContent = s;
+    stageSel.appendChild(o);
+  });
+
+  document.getElementById("saveBtn").onclick = saveBattle;
+
   update();
 };
 
