@@ -126,7 +126,7 @@ const weapons = [
   ...blasters,
   ...rollers,
   ...chargers,
-  ...sloshers,
+  ...sloshes,
   ...spinners,
   ...maneuvers,
   ...shelters,
@@ -145,7 +145,10 @@ const select = document.getElementById("weapon");
 
 let battles = JSON.parse(localStorage.getItem("battles")) || [];
 
-// 武器セット
+// =====================
+// セレクト生成
+// =====================
+
 weapons.forEach(w => {
   const opt = document.createElement("option");
   opt.value = w;
@@ -153,7 +156,10 @@ weapons.forEach(w => {
   select.appendChild(opt);
 });
 
+// =====================
 // 保存
+// =====================
+
 form.addEventListener("submit", e => {
   e.preventDefault();
 
@@ -167,18 +173,27 @@ form.addEventListener("submit", e => {
   });
 
   localStorage.setItem("battles", JSON.stringify(battles));
+
   form.reset();
   render();
+
+  showToast("保存しました！");
 });
 
+// =====================
 // 削除
+// =====================
+
 function removeBattle(i) {
   battles.splice(i, 1);
   localStorage.setItem("battles", JSON.stringify(battles));
   render();
 }
 
+// =====================
 // 表示
+// =====================
+
 function render() {
   list.innerHTML = "";
 
@@ -190,7 +205,7 @@ function render() {
       <b>${b.rule}</b><br>
       武器：${b.weapon}<br>
       結果：${b.result}<br>
-      キル：${b.kill} / デス：${b.death}<br>
+      K/D：${b.kill}/${b.death}<br>
       メモ：${b.memo || "なし"}<br><br>
       <button onclick="removeBattle(${i})">削除</button>
     `;
@@ -202,13 +217,16 @@ function render() {
   drawWinChart();
 }
 
+// =====================
 // 統計
+// =====================
+
 function updateStats() {
-  const total = battles.length;
   const wins = battles.filter(b => b.result === "win").length;
   const loses = battles.filter(b => b.result === "lose").length;
+  const total = battles.length;
 
-  const rate = (wins + loses) === 0 ? 0 : Math.round((wins / (wins + loses)) * 100);
+  const rate = (wins + loses) === 0 ? 0 : Math.round((wins/(wins+loses))*100);
 
   document.getElementById("totalBattles").textContent = total;
   document.getElementById("wins").textContent = wins;
@@ -216,10 +234,12 @@ function updateStats() {
   document.getElementById("winRate").textContent = rate + "%";
 }
 
+// =====================
 // グラフ
+// =====================
+
 function drawWinChart() {
-  const canvas = document.getElementById("winChart");
-  const ctx = canvas.getContext("2d");
+  const ctx = document.getElementById("winChart").getContext("2d");
 
   const win = battles.filter(b => b.result === "win").length;
   const lose = battles.filter(b => b.result === "lose").length;
@@ -241,12 +261,24 @@ function drawWinChart() {
   ctx.fillStyle = "#F44336";
   ctx.arc(150, 150, 100, angle, Math.PI * 2);
   ctx.fill();
-
-  ctx.fillStyle = "#000";
-  ctx.textAlign = "center";
-  ctx.fillText("勝率", 150, 140);
-  ctx.fillText(`${rate}%`, 150, 160);
 }
 
-// 初期
+// =====================
+// トースト
+// =====================
+
+function showToast(text) {
+  const toast = document.getElementById("toast");
+  toast.textContent = text;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 1200);
+}
+
+// =====================
+// 初期化
+// =====================
+
 render();
