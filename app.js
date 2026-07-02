@@ -208,15 +208,46 @@ function saveBattle(){
     special:n("special")
   });
 
-  localStorage.setItem("battles",JSON.stringify(battles));
+  sync();
 
   clearInputs();
-  update();
-
-  // ⭐ここ追加
   showToast("保存できました");
 }
 
+/* =====================
+ 1件削除
+===================== */
+function deleteBattle(index){
+
+  if(!confirm("この戦績を削除しますか？")) return;
+
+  battles.splice(index,1);
+  sync();
+
+  showToast("削除しました");
+}
+
+/* =====================
+ 全削除
+===================== */
+function clearAllBattles(){
+
+  if(!confirm("全戦績を削除しますか？")) return;
+
+  battles = [];
+  sync();
+
+  showToast("全データ削除しました");
+}
+
+/* =====================
+ 同期
+===================== */
+function sync(){
+
+  localStorage.setItem("battles", JSON.stringify(battles));
+  update();
+}
 /* =====================
  入力クリア
 ===================== */
@@ -243,15 +274,19 @@ function renderList(){
 
   battles.slice().reverse().forEach((b,i)=>{
 
+    const index = battles.length - 1 - i;
+
     const div=document.createElement("div");
     div.className="card";
 
     div.innerHTML=`
       <b>${b.weapon}</b><br>
       ${b.stage}<br>
-      ${b.battleType} / ${b.rule} / ${b.result}<br>
+      ${b.rule} / ${b.result}<br>
       K:${b.kill} D:${b.death}<br>
-      ${b.paint}p
+      ${b.paint}p<br>
+
+      <button onclick="deleteBattle(${index})">削除</button>
     `;
 
     list.appendChild(div);
