@@ -299,11 +299,11 @@ function renderAnalysis(){
       負け:${battles.filter(b=>b.result==="lose").length}<br>
       切断:${battles.filter(b=>b.result==="disconnect").length}<br>
       無効:${battles.filter(b=>b.result==="invalid").length}<br><br>
-　　　　平均キル: ${avg("kill").toFixed(2)}<br>
-　　　　平均アシスト: ${avg("assist").toFixed(2)}<br>
-　　　　平均デス: ${avg("death").toFixed(2)}<br>
-　　　　平均塗り: ${avg("paint").toFixed(1)}<br>
-　　　　平均スペシャル: ${avg("special").toFixed(2)}<br>
+　　平均キル: ${avg("kill").toFixed(2)}<br>
+　　平均アシスト: ${avg("assist").toFixed(2)}<br>
+　　平均デス: ${avg("death").toFixed(2)}<br>
+　　平均塗り: ${avg("paint").toFixed(1)}<br>
+　　平均スペシャル: ${avg("special").toFixed(2)}<br>
 
     </div>
 
