@@ -12,14 +12,14 @@
 <h1>Battle Log</h1>
 
 <!-- タブ -->
-<div class="tabs">
-  <button onclick="showTab('inputTab')">入力</button>
-  <button onclick="showTab('listTab')">戦績</button>
-  <button onclick="showTab('statsTab')">統計</button>
+<div class="tabbar">
+  <div class="tab active" onclick="showTab('inputTab')">入力</div>
+  <div class="tab" onclick="showTab('listTab')">戦績</div>
+  <div class="tab" onclick="showTab('statsTab')">統計</div>
 </div>
 
 <!-- 入力 -->
-<section id="inputTab" class="tab active">
+<section id="inputTab" class="page active">
 
   <div class="card">
 
@@ -45,14 +45,14 @@
 </section>
 
 <!-- 戦績 -->
-<section id="listTab" class="tab">
+<section id="listTab" class="page">
 
   <div id="list"></div>
 
 </section>
 
 <!-- 統計 -->
-<section id="statsTab" class="tab">
+<section id="statsTab" class="page">
 
   <div id="summary"></div>
 
