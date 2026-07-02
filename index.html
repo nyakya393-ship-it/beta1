@@ -13,15 +13,15 @@
 
 <!-- タブ -->
 <div class="tabbar">
-  <div class="tab active" onclick="showTab('inputTab')">入力</div>
-  <div class="tab" onclick="showTab('listTab')">戦績</div>
-  <div class="tab" onclick="showTab('statsTab')">統計</div>
+  <div class="tab active" data-tab="input">入力</div>
+  <div class="tab" data-tab="battle">戦績</div>
+  <div class="tab" data-tab="analysis">分析</div>
 </div>
 
 <!-- 入力 -->
-<section id="inputTab" class="page active">
+<section id="input" class="page active">
 
-  <div class="card">
+  <div class="center">
 
     <select id="weapon"></select>
     <select id="stage"></select>
@@ -37,6 +37,7 @@
     <input id="assist" type="number" placeholder="アシスト">
     <input id="death" type="number" placeholder="デス">
     <input id="paint" type="number" placeholder="塗り">
+    <input id="special" type="number" placeholder="スペシャル">
 
     <button onclick="saveBattle()">保存</button>
 
@@ -45,23 +46,13 @@
 </section>
 
 <!-- 戦績 -->
-<section id="listTab" class="page">
-
-  <div id="list"></div>
-
+<section id="battle" class="page">
+  <div id="battleList"></div>
 </section>
 
-<!-- 統計 -->
-<section id="statsTab" class="page">
-
+<!-- 分析 -->
+<section id="analysis" class="page">
   <div id="summary"></div>
-
-  <h3>武器ランキング</h3>
-  <div id="weaponRank"></div>
-
-  <h3>ステージランキング</h3>
-  <div id="stageRank"></div>
-
 </section>
 
 <script src="app.js"></script>
