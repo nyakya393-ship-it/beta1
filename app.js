@@ -213,6 +213,17 @@ function saveBattle(){
   clearInputs();
   showToast("保存できました");
 }
+function forceNumber(id){
+  const el = document.getElementById(id);
+
+  el.addEventListener("input", () => {
+    el.value = el.value.replace(/[^0-9]/g, "");
+  });
+}
+
+window.onload = () => {
+  ["kill","assist","death","paint","special"].forEach(forceNumber);
+};
 
 /* =====================
  1件削除
