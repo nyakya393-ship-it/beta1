@@ -17,15 +17,14 @@
 <div class="tabs">
   <button onclick="showTab('inputTab')">入力</button>
   <button onclick="showTab('listTab')">戦績</button>
+  <button onclick="showTab('statsTab')">統計</button>
 </div>
 
 <!-- 入力 -->
 <section id="inputTab" class="tab active">
 
-  <!-- ★ここが重要（必ず存在） -->
   <select id="battleType"></select>
   <select id="rule"></select>
-
   <select id="stage"></select>
   <select id="weapon"></select>
 
@@ -37,8 +36,8 @@
   <input id="kill" type="number" placeholder="キル">
   <input id="assist" type="number" placeholder="アシスト">
   <input id="death" type="number" placeholder="デス">
-  <input id="paint" type="number" placeholder="塗り">
-  <input id="special" type="number" placeholder="スペシャル">
+  <input id="paint" type="number" placeholder="塗りポイント">
+  <input id="special" type="number" placeholder="スペシャル回数">
 
   <button id="saveBtn">保存</button>
 
@@ -47,6 +46,11 @@
 <!-- 戦績 -->
 <section id="listTab" class="tab">
   <div id="list"></div>
+</section>
+
+<!-- ⭐統計タブ -->
+<section id="statsTab" class="tab">
+  <div id="statsBox"></div>
 </section>
 
 <script src="app.js"></script>
