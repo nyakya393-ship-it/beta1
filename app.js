@@ -260,17 +260,34 @@ function clearInputs(){
 ===================== */
 function renderBattleList(){
 
-  const el=document.getElementById("battleList");
-
-  if(!el) return;
+  const el = document.getElementById("battleList");
 
   el.innerHTML = battles.map((b,i)=>`
     <div class="card">
+
+      <button class="deleteBtn" onclick="deleteBattle(${i})">削除</button>
+
       ${b.result} | ${b.weapon} | ${b.stage}<br>
       ${b.rule} / ${b.battleType}<br>
       K:${b.kill} A:${b.assist} D:${b.death} 塗:${b.paint} SP:${b.special}
+
     </div>
   `).join("");
+}
+
+function deleteBattle(index){
+
+  if(!confirm("この戦績を削除する？")) return;
+
+  battles.splice(index, 1);
+
+  localStorage.setItem("battles", JSON.stringify(battles));
+
+  renderBattleList();
+  renderAnalysis();
+
+  showToast("削除しました");
+
 }
 
 /* =====================
