@@ -1,5 +1,8 @@
 let battles = JSON.parse(localStorage.getItem("battles")) || [];
 
+/* =====================
+ バトル種類（確定版）
+===================== */
 const battleTypes = [
   "レギュラーマッチ",
   "バンカラマッチ（オープン）",
@@ -12,8 +15,6 @@ const battleTypes = [
   "トリカラバトル（守備）",
   "プライベートマッチ"
 ];
-
-const rules = ["ナワバリバトル","ガチエリア","ガチヤグラ","ガチホコバトル","ガチアサリ"];
 
 const weapons = [
   // =====================
@@ -129,7 +130,6 @@ const weapons = [
   "オーダーワイパーレプリカ",
   "デンタルワイパーミント","デンタルワイパースミ"
 ];
-
 const stages = [
   "ユノハナ大渓谷",
   "ゴンズイ地区",
@@ -157,6 +157,7 @@ const stages = [
   "リュウグウターミナル",
   "デカライン高架下"
 ];
+const rules = ["ナワバリバトル","ガチエリア","ガチヤグラ","ガチホコバトル","ガチアサリ"];
 
 /* 初期化 */
 window.onload = () => {
@@ -166,28 +167,33 @@ window.onload = () => {
   fill("rule", rules);
   fill("battleType", battleTypes);
 
-  renderAll();
+  setupTabs();
+  renderBattleList();
+  renderAnalysis();
 };
 
-/* タブ切替（ここが重要） */
-function showTab(id){
+/* =====================
+ タブ
+===================== */
+function setupTabs(){
+  document.querySelectorAll(".tab").forEach(tab=>{
+    tab.onclick = () => {
 
-  document.querySelectorAll(".page")
-    .forEach(p => p.classList.remove("active"));
+      document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+      document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
 
-  document.querySelectorAll(".tab")
-    .forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      document.getElementById(tab.dataset.tab).classList.add("active");
 
-  document.getElementById(id).classList.add("active");
-
-  event.target.classList.add("active");
-
-  renderAll();
+    };
+  });
 }
 
-/* セレクト */
+/* =====================
+ セレクト
+===================== */
 function fill(id, arr){
-  const el = document.getElementById(id);
+  const el=document.getElementById(id);
 
   arr.forEach(v=>{
     const o=document.createElement("option");
@@ -197,7 +203,9 @@ function fill(id, arr){
   });
 }
 
-/* 保存 */
+/* =====================
+ 保存
+===================== */
 function saveBattle(){
 
   battles.push({
@@ -209,66 +217,103 @@ function saveBattle(){
     kill:n("kill"),
     assist:n("assist"),
     death:n("death"),
-    paint:n("paint")
+    paint:n("paint"),
+    special:n("special")
   });
 
   localStorage.setItem("battles", JSON.stringify(battles));
 
   clearInputs();
-  renderAll();
+
+  renderBattleList();
+  renderAnalysis();
 
   alert("保存できました");
 }
 
-/* クリア */
+/* =====================
+ 入力クリア
+===================== */
 function clearInputs(){
-  ["kill","assist","death","paint"].forEach(id=>{
+  ["kill","assist","death","paint","special"].forEach(id=>{
     document.getElementById(id).value="";
   });
 }
 
-/* 一括 */
-function renderAll(){
-  renderList();
-  renderStats();
-}
+/* =====================
+ 戦績
+===================== */
+function renderBattleList(){
 
-/* 戦績 */
-function renderList(){
+  const el=document.getElementById("battleList");
 
-  const el=document.getElementById("list");
-  el.innerHTML = battles.slice().reverse().map(b=>`
+  if(!el) return;
+
+  el.innerHTML = battles.map((b,i)=>`
     <div class="card">
-      ${b.weapon}<br>
-      ${b.stage}<br>
+      ${b.result} | ${b.weapon} | ${b.stage}<br>
       ${b.rule} / ${b.battleType}<br>
-      ${b.result}<br>
-      K:${b.kill} D:${b.death}
+      K:${b.kill} A:${b.assist} D:${b.death} 塗:${b.paint} SP:${b.special}
     </div>
   `).join("");
 }
 
-/* 統計 */
-function renderStats(){
+/* =====================
+ 分析（完全版）
+===================== */
+function renderAnalysis(){
 
-  const wins = battles.filter(b=>b.result==="win").length;
-  const kills = sum("kill");
-  const deaths = sum("death");
+  const el=document.getElementById("summary");
+  if(!el) return;
 
-  const kd = deaths ? kills/deaths : kills;
+  if(battles.length===0){
+    el.innerHTML="<div class='card'>データなし</div>";
+    return;
+  }
 
-  document.getElementById("summary").innerHTML = `
-    試合数: ${battles.length}<br>
-    勝率: ${(battles.length ? wins/battles.length*100 : 0).toFixed(1)}%<br>
-    K/D: ${kd.toFixed(2)}
+  const wins=battles.filter(b=>b.result==="win").length;
+
+  const kills=sum("kill");
+  const deaths=sum("death");
+
+  const kd=deaths?kills/deaths:kills;
+
+  const avgKill=avg("kill");
+  const avgDeath=avg("death");
+  const avgPaint=avg("paint");
+  const avgSp=avg("special");
+
+  const bestKill=[...battles].sort((a,b)=>b.kill-a.kill)[0];
+
+  el.innerHTML=`
+    <div class="card">
+
+      📊 基本統計<br>
+      試合数:${battles.length}<br>
+      勝率:${(wins/battles.length*100).toFixed(1)}%<br>
+      K/D:${kd.toFixed(2)}<br><br>
+
+      🎯 平均<br>
+      キル:${avgKill.toFixed(2)}<br>
+      デス:${avgDeath.toFixed(2)}<br>
+      塗り:${avgPaint.toFixed(1)}<br>
+      SP:${avgSp.toFixed(1)}<br><br>
+
+      🔥 ハイライト<br>
+      最高キル:${bestKill.kill} (${bestKill.weapon})<br>
+
+    </div>
+
+    ${weaponStats()}
+    ${stageStats()}
+    ${typeStats()}
   `;
-
-  renderWeaponRank();
-  renderStageRank();
 }
 
-/* 武器 */
-function renderWeaponRank(){
+/* =====================
+ 武器分析
+===================== */
+function weaponStats(){
 
   const map={};
 
@@ -278,17 +323,23 @@ function renderWeaponRank(){
     if(b.result==="win") map[b.weapon].win++;
   });
 
-  const arr=Object.entries(map).map(([k,v])=>({
-    name:k,
-    rate:v.win/v.total
-  })).sort((a,b)=>b.rate-a.rate);
+  const arr=Object.entries(map)
+    .map(([k,v])=>({name:k,rate:v.win/v.total}))
+    .sort((a,b)=>b.rate-a.rate)
+    .slice(0,5);
 
-  document.getElementById("weaponRank").innerHTML =
-    arr.slice(0,5).map(x=>`${x.name} ${(x.rate*100).toFixed(1)}%<br>`).join("");
+  return `
+    <div class="card">
+      🏆 武器TOP<br>
+      ${arr.map(x=>`${x.name} ${(x.rate*100).toFixed(1)}%`).join("<br>")}
+    </div>
+  `;
 }
 
-/* ステージ */
-function renderStageRank(){
+/* =====================
+ ステージ分析
+===================== */
+function stageStats(){
 
   const map={};
 
@@ -298,16 +349,51 @@ function renderStageRank(){
     if(b.result==="win") map[b.stage].win++;
   });
 
-  const arr=Object.entries(map).map(([k,v])=>({
-    name:k,
-    rate:v.win/v.total
-  })).sort((a,b)=>b.rate-a.rate);
+  const arr=Object.entries(map)
+    .map(([k,v])=>({name:k,rate:v.win/v.total}))
+    .sort((a,b)=>b.rate-a.rate)
+    .slice(0,5);
 
-  document.getElementById("stageRank").innerHTML =
-    arr.slice(0,5).map(x=>`${x.name} ${(x.rate*100).toFixed(1)}%<br>`).join("");
+  return `
+    <div class="card">
+      🗺 ステージTOP<br>
+      ${arr.map(x=>`${x.name} ${(x.rate*100).toFixed(1)}%`).join("<br>")}
+    </div>
+  `;
 }
 
-/* ヘルパー */
+/* =====================
+ 種類分析
+===================== */
+function typeStats(){
+
+  const map={};
+
+  battles.forEach(b=>{
+    if(!map[b.battleType]) map[b.battleType]={win:0,total:0};
+    map[b.battleType].total++;
+    if(b.result==="win") map[b.battleType].win++;
+  });
+
+  const arr=Object.entries(map)
+    .map(([k,v])=>({name:k,rate:v.win/v.total}));
+
+  return `
+    <div class="card">
+      ⚔ 種類別勝率<br>
+      ${arr.map(x=>`${x.name} ${(x.rate*100).toFixed(1)}%`).join("<br>")}
+    </div>
+  `;
+}
+
+/* =====================
+ 数学
+===================== */
+function sum(k){return battles.reduce((a,b)=>a+(b[k]||0),0);}
+function avg(k){return battles.length?sum(k)/battles.length:0;}
+
+/* =====================
+ ヘルパー
+===================== */
 function v(id){return document.getElementById(id)?.value||"";}
 function n(id){return Number(document.getElementById(id)?.value||0);}
-function sum(k){return battles.reduce((a,b)=>a+(b[k]||0),0);}
