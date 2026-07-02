@@ -212,6 +212,9 @@ function saveBattle(){
 
   clearInputs();
   update();
+
+  // ⭐ここ追加
+  showToast("保存できました");
 }
 
 /* =====================
@@ -332,3 +335,15 @@ function renderStageRank(){
 function v(id){return document.getElementById(id)?.value||"";}
 function n(id){return Number(document.getElementById(id)?.value||0);}
 function sum(k){return battles.reduce((a,b)=>a+(b[k]||0),0);}
+
+function showToast(text) {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
+
+  toast.textContent = text;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 1500);
+}
