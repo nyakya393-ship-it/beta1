@@ -3,63 +3,87 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IkaLog</title>
+<title>Stat Like App</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
-  <div id="toast"></div>
-
-  <body>
+<body>
 
 <header>
-  <h1>Battle Dashboard</h1>
+  <h2>Battle Log</h2>
 </header>
 
-<!-- タブ -->
-<div class="tabs">
-  <button onclick="showTab('inputTab')">入力</button>
-  <button onclick="showTab('listTab')">戦績</button>
-  <button onclick="showTab('statsTab')">分析</button>
-</div>
-
 <!-- 入力 -->
-<section id="inputTab" class="tab active">
+<section class="card">
 
-  <select id="battleType"></select>
-  <select id="rule"></select>
-  <select id="stage"></select>
   <select id="weapon"></select>
+  <select id="stage"></select>
+  <select id="rule"></select>
+  <select id="battleType"></select>
 
   <select id="result">
     <option value="win">勝ち</option>
     <option value="lose">負け</option>
   </select>
 
-  <input id="kill" type="number" min="0" placeholder="キル">
-  <input id="assist" type="number" min="0" placeholder="アシスト">
-  <input id="death" type="number" min="0" placeholder="デス">
-  <input id="paint" type="number" min="0" placeholder="塗り">
-  <input id="special" type="number" min="0" placeholder="SP">
+</section>
 
-  <button onclick="saveBattle()">保存</button>
+<!-- 数値入力（片手UI） -->
+<section class="grid">
+
+  <div class="numBox">
+    <label>キル</label>
+    <div class="btnRow">
+      <button onclick="change('kill',-1)">−</button>
+      <input id="kill" type="number" value="0">
+      <button onclick="change('kill',1)">＋</button>
+    </div>
+  </div>
+
+  <div class="numBox">
+    <label>アシスト</label>
+    <div class="btnRow">
+      <button onclick="change('assist',-1)">−</button>
+      <input id="assist" type="number" value="0">
+      <button onclick="change('assist',1)">＋</button>
+    </div>
+  </div>
+
+  <div class="numBox">
+    <label>デス</label>
+    <div class="btnRow">
+      <button onclick="change('death',-1)">−</button>
+      <input id="death" type="number" value="0">
+      <button onclick="change('death',1)">＋</button>
+    </div>
+  </div>
+
+  <div class="numBox">
+    <label>塗り</label>
+    <div class="btnRow">
+      <button onclick="change('paint',-10)">−</button>
+      <input id="paint" type="number" value="0">
+      <button onclick="change('paint',10)">＋</button>
+    </div>
+  </div>
 
 </section>
 
-<!-- 戦績 -->
-<section id="listTab" class="tab">
-  <div id="list"></div>
-</section>
+<!-- 保存 -->
+<button class="saveBtn" onclick="saveBattle()">保存</button>
 
-<!-- 分析 -->
-<section id="statsTab" class="tab">
-  <div class="card" id="summary"></div>
+<!-- 統計 -->
+<section class="stats">
 
-  <h3>🏆 武器ランキング</h3>
+  <h3>統計</h3>
+  <div id="summary"></div>
+
+  <h3>武器ランキング</h3>
   <div id="weaponRank"></div>
 
-  <h3>🗺 ステージランキング</h3>
+  <h3>ステージランキング</h3>
   <div id="stageRank"></div>
-　<button onclick="clearAllBattles()">全戦績を削除</button>
+
 </section>
 
 <script src="app.js"></script>
