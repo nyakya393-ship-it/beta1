@@ -11,7 +11,6 @@
 
 <h1>Battle Log</h1>
 
-<!-- タブ -->
 <div class="tabbar">
   <div class="tab active" data-tab="input">入力</div>
   <div class="tab" data-tab="battle">戦績</div>
@@ -31,6 +30,8 @@
     <select id="result">
       <option value="win">勝ち</option>
       <option value="lose">負け</option>
+      <option value="disconnect">通信切断</option>
+      <option value="invalid">無効試合</option>
     </select>
 
     <input id="kill" type="number" placeholder="キル">
@@ -42,7 +43,6 @@
     <button onclick="saveBattle()">保存</button>
 
   </div>
-
 </section>
 
 <!-- 戦績 -->
@@ -55,7 +55,8 @@
   <div id="summary"></div>
 </section>
 
-<script src="app.js"></script>
 <div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
 </body>
 </html>
