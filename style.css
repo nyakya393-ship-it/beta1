@@ -6,7 +6,7 @@ body {
 }
 
 h1 {
-  padding: 10px;
+  margin: 10px;
   color: #22d3ee;
 }
 
@@ -45,4 +45,11 @@ button {
   padding: 10px;
   background: #22d3ee;
   border: none;
+}
+
+.card {
+  background: #111827;
+  margin: 8px 0;
+  padding: 10px;
+  border-left: 3px solid #22d3ee;
 }
