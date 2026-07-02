@@ -263,24 +263,30 @@ function renderList(){
 ===================== */
 function renderStats(){
 
-  const wins=battles.filter(b=>b.result==="win").length;
+  const wins = battles.filter(b=>b.result==="win").length;
 
-  const kills=sum("kill");
-  const deaths=sum("death");
+  const kills = sum("kill");
+  const deaths = sum("death");
+  const paint = sum("paint");
 
-  const rate=battles.length?(wins/battles.length)*100:0;
-  const kd=deaths?(kills/deaths):kills;
+  const avgKill = battles.length ? kills / battles.length : 0;
+  const avgDeath = battles.length ? deaths / battles.length : 0;
+  const avgPaint = battles.length ? paint / battles.length : 0;
 
-  document.getElementById("summary").innerHTML=`
+  const kd = deaths ? kills/deaths : kills;
+
+  document.getElementById("summary").innerHTML = `
     試合数:${battles.length}<br>
-    勝率:${rate.toFixed(1)}%<br>
-    K/D:${kd.toFixed(2)}
+    勝率:${(wins/battles.length*100||0).toFixed(1)}%<br>
+    K/D:${kd.toFixed(2)}<br>
+    平均キル:${avgKill.toFixed(1)}<br>
+    平均デス:${avgDeath.toFixed(1)}<br>
+    平均塗り:${avgPaint.toFixed(1)}
   `;
 
   renderWeaponRank();
   renderStageRank();
 }
-
 /* =====================
  武器ランキング
 ===================== */
@@ -289,22 +295,36 @@ function renderWeaponRank(){
   const map={};
 
   battles.forEach(b=>{
-    if(!map[b.weapon])map[b.weapon]={win:0,total:0};
+    if(!map[b.weapon]){
+      map[b.weapon]={win:0,total:0,kill:0,death:0};
+    }
+
     map[b.weapon].total++;
-    if(b.result==="win")map[b.weapon].win++;
+    if(b.result==="win") map[b.weapon].win++;
+
+    map[b.weapon].kill += b.kill||0;
+    map[b.weapon].death += b.death||0;
   });
 
-  const arr=Object.entries(map).map(([k,v])=>({
-    name:k,
-    rate:v.win/v.total
-  })).sort((a,b)=>b.rate-a.rate);
+  const arr = Object.entries(map).map(([name,v])=>({
 
-  document.getElementById("weaponRank").innerHTML=
+    name,
+    winRate: v.win / v.total,
+    kd: v.death ? v.kill / v.death : v.kill,
+    total: v.total
+
+  })).sort((a,b)=>b.winRate - a.winRate);
+
+  document.getElementById("weaponRank").innerHTML =
     arr.slice(0,10).map(x=>`
-      <div class="card">${x.name} ${(x.rate*100).toFixed(1)}%</div>
+      <div class="card">
+        <b>${x.name}</b><br>
+        勝率:${(x.winRate*100).toFixed(1)}%<br>
+        K/D:${x.kd.toFixed(2)}<br>
+        試合:${x.total}
+      </div>
     `).join("");
 }
-
 /* =====================
  ステージランキング
 ===================== */
@@ -313,22 +333,29 @@ function renderStageRank(){
   const map={};
 
   battles.forEach(b=>{
-    if(!map[b.stage])map[b.stage]={win:0,total:0};
+    if(!map[b.stage]){
+      map[b.stage]={win:0,total:0};
+    }
+
     map[b.stage].total++;
-    if(b.result==="win")map[b.stage].win++;
+    if(b.result==="win") map[b.stage].win++;
   });
 
-  const arr=Object.entries(map).map(([k,v])=>({
-    name:k,
-    rate:v.win/v.total
+  const arr = Object.entries(map).map(([name,v])=>({
+    name,
+    rate: v.win / v.total,
+    total: v.total
   })).sort((a,b)=>b.rate-a.rate);
 
-  document.getElementById("stageRank").innerHTML=
+  document.getElementById("stageRank").innerHTML =
     arr.slice(0,10).map(x=>`
-      <div class="card">${x.name} ${(x.rate*100).toFixed(1)}%</div>
+      <div class="card">
+        <b>${x.name}</b><br>
+        勝率:${(x.rate*100).toFixed(1)}%<br>
+        試合:${x.total}
+      </div>
     `).join("");
 }
-
 /* =====================
  ヘルパー
 ===================== */
