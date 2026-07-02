@@ -1,7 +1,7 @@
 let battles = JSON.parse(localStorage.getItem("battles")) || [];
 
 /* =====================
- バトル種類
+ データ
 ===================== */
 const battleTypes = [
   "レギュラーマッチ",
@@ -15,9 +15,6 @@ const battleTypes = [
   "プライベートマッチ"
 ];
 
-/* =====================
- ルール
-===================== */
 const rules = [
   "ナワバリバトル",
   "ガチエリア",
@@ -26,9 +23,6 @@ const rules = [
   "ガチアサリ"
 ];
 
-/* =====================
- 武器
-===================== */
 const weapons = [
 
 /* =====================
@@ -146,25 +140,32 @@ const weapons = [
 
 ];
 
-/* =====================
- ステージ
-===================== */
 const stages = [
-
-  "ユノハナ大渓谷","ゴンズイ地区","ヤガラ市場","マテガイ放水路",
-
-  "ナメロウ金属","クサヤ温泉","ヒラメが丘団地","マサバ海峡大橋",
-
-  "キンメダイ美術館","マヒマヒリゾート＆スパ","海女美術大学",
-
-  "チョウザメ造船","ザトウマーケット","スメーシーワールド",
-
-  "コンブトラック","マンタマリア号","タカアシ経済特区",
-
-  "オヒョウ海運","バイガイ亭","ネギトロ炭鉱",
-
-  "カジキ空港","リュウグウターミナル","デカライン高架下"
-
+  "ユノハナ大渓谷",
+  "ゴンズイ地区",
+  "ヤガラ市場",
+  "マテガイ放水路",
+  "ナンプラー遺跡",
+  "ナメロウ金属",
+  "クサヤ温泉",
+  "タラポートショッピングパーク",
+  "ヒラメが丘団地",
+  "マサバ海峡大橋",
+  "キンメダイ美術館",
+  "マヒマヒリゾート＆スパ",
+  "海女美術大学",
+  "チョウザメ造船",
+  "ザトウマーケット",
+  "スメーシーワールド",
+  "コンブトラック",
+  "マンタマリア号",
+  "タカアシ経済特区",
+  "オヒョウ海運",
+  "バイガイ亭",
+  "ネギトロ炭鉱",
+  "カジキ空港",
+  "リュウグウターミナル",
+  "デカライン高架下"
 ];
 
 /* =====================
@@ -173,10 +174,12 @@ const stages = [
 function showTab(id) {
   document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
   document.getElementById(id).classList.add("active");
+
+  if (id === "statsTab") renderStats();
 }
 
 /* =====================
- 初期化（ここが原因潰し）
+ 初期化
 ===================== */
 window.addEventListener("DOMContentLoaded", () => {
 
@@ -190,17 +193,8 @@ window.addEventListener("DOMContentLoaded", () => {
   update();
 });
 
-/* =====================
- セレクト生成
-===================== */
 function fill(id, arr) {
   const el = document.getElementById(id);
-
-  if (!el) {
-    console.error("missing select:", id);
-    return;
-  }
-
   arr.forEach(v => {
     const o = document.createElement("option");
     o.value = v;
@@ -232,21 +226,38 @@ function saveBattle() {
 }
 
 /* =====================
- ヘルパー
-===================== */
-function v(id) {
-  return document.getElementById(id)?.value || "";
-}
-
-function n(id) {
-  return Number(document.getElementById(id)?.value || 0);
-}
-
-/* =====================
  更新
 ===================== */
 function update() {
   renderList();
+}
+
+/* =====================
+ 統計（タブ専用）
+===================== */
+function renderStats() {
+
+  const wins = battles.filter(b => b.result === "win").length;
+  const loses = battles.filter(b => b.result === "lose").length;
+
+  const kills = sum("kill");
+  const deaths = sum("death");
+  const paint = sum("paint");
+
+  const rate = battles.length ? (wins / battles.length) * 100 : 0;
+  const kd = deaths ? kills / deaths : kills;
+
+  const box = document.getElementById("statsBox");
+  if (!box) return;
+
+  box.innerHTML = `
+    <div class="card">試合数: ${battles.length}</div>
+    <div class="card">勝ち: ${wins}</div>
+    <div class="card">負け: ${loses}</div>
+    <div class="card">勝率: ${rate.toFixed(1)}%</div>
+    <div class="card">K/D: ${kd.toFixed(2)}</div>
+    <div class="card">平均塗り: ${battles.length ? (paint / battles.length).toFixed(1) : 0}</div>
+  `;
 }
 
 /* =====================
@@ -262,8 +273,7 @@ function renderList() {
     const idx = battles.length - 1 - i;
 
     const div = document.createElement("div");
-    div.style.padding = "10px";
-    div.style.borderBottom = "1px solid #333";
+    div.className = "card";
 
     div.innerHTML = `
       <b>${b.weapon}</b><br>
@@ -271,7 +281,6 @@ function renderList() {
       ${b.battleType} / ${b.rule} / ${b.result}<br>
       K:${b.kill} A:${b.assist} D:${b.death}<br>
       ${b.paint}p SP:${b.special}<br>
-      <button onclick="del(${idx})">削除</button>
     `;
 
     list.appendChild(div);
@@ -279,10 +288,8 @@ function renderList() {
 }
 
 /* =====================
- 削除
+ ヘルパー
 ===================== */
-function del(i) {
-  battles.splice(i,1);
-  localStorage.setItem("battles", JSON.stringify(battles));
-  update();
-}
+function v(id){ return document.getElementById(id)?.value || ""; }
+function n(id){ return Number(document.getElementById(id)?.value || 0); }
+function sum(k){ return battles.reduce((a,b)=>a+(b[k]||0),0); }
