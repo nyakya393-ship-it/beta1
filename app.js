@@ -219,7 +219,19 @@ function saveBattle() {
     special: n("special")
   });
 
-  sync();
+  localStorage.setItem("battles", JSON.stringify(battles));
+
+  // ⭐保存成功報告
+  alert("保存できました");
+
+  // ⭐入力リセット
+  document.getElementById("kill").value = "";
+  document.getElementById("assist").value = "";
+  document.getElementById("death").value = "";
+  document.getElementById("paint").value = "";
+  document.getElementById("special").value = "";
+
+  update();
 }
 
 /* =====================
