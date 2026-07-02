@@ -1,17 +1,18 @@
 let battles = JSON.parse(localStorage.getItem("battles")) || [];
 
 /* =====================
- バトル種類（対戦のみ）
+ バトル種類（あなたの完全版）
 ===================== */
 const battleTypes = [
   "レギュラーマッチ",
-  "バンカラマッチ（チャレンジ）",
   "バンカラマッチ（オープン）",
+  "バンカラマッチ（チャレンジ）",
   "Xマッチ",
-  "フェスマッチ（チャレンジ）",
-  "フェスマッチ（オープン）",
   "イベントマッチ",
-  "トリカラバトル",
+  "フェスマッチ（オープン）",
+  "フェスマッチ（チャレンジ）",
+  "トリカラバトル（攻撃）",
+  "トリカラバトル（守備）",
   "プライベートマッチ"
 ];
 
@@ -185,8 +186,21 @@ window.onload = () => {
   fill("rule", rules);
   fill("battleType", battleTypes);
 
-  renderStats();
+  renderAll();
 };
+
+/* =====================
+ タブ切替
+===================== */
+function showTab(id){
+
+  document.querySelectorAll(".tab")
+    .forEach(t=>t.classList.remove("active"));
+
+  document.getElementById(id).classList.add("active");
+
+  renderAll();
+}
 
 /* =====================
  セレクト生成
@@ -196,19 +210,11 @@ function fill(id, arr){
   if(!el) return;
 
   arr.forEach(v=>{
-    const o=document.createElement("option");
-    o.value=v;
-    o.textContent=v;
-    el.appendChild(o);
+    const opt = document.createElement("option");
+    opt.value = v;
+    opt.textContent = v;
+    el.appendChild(opt);
   });
-}
-
-/* =====================
- ＋−操作
-===================== */
-function change(id, val){
-  const el = document.getElementById(id);
-  el.value = Number(el.value || 0) + val;
 }
 
 /* =====================
@@ -230,20 +236,46 @@ function saveBattle(){
 
   localStorage.setItem("battles", JSON.stringify(battles));
 
-  resetInputs();
-  renderStats();
+  clearInputs();
+  renderAll();
 
-  showToast("保存できました");
+  alert("保存できました");
 }
 
 /* =====================
- 入力リセット
+ 入力クリア
 ===================== */
-function resetInputs(){
+function clearInputs(){
   ["kill","assist","death","paint"].forEach(id=>{
-    const el = document.getElementById(id);
-    if(el) el.value = 0;
+    document.getElementById(id).value = "";
   });
+}
+
+/* =====================
+ 一括描画
+===================== */
+function renderAll(){
+  renderList();
+  renderStats();
+}
+
+/* =====================
+ 戦績一覧
+===================== */
+function renderList(){
+
+  const el = document.getElementById("list");
+  if(!el) return;
+
+  el.innerHTML = battles.slice().reverse().map(b=>`
+    <div class="card">
+      <b>${b.weapon}</b><br>
+      ${b.stage}<br>
+      ${b.rule} / ${b.battleType}<br>
+      ${b.result}<br>
+      K:${b.kill} D:${b.death} 塗:${b.paint}
+    </div>
+  `).join("");
 }
 
 /* =====================
@@ -255,11 +287,6 @@ function renderStats(){
 
   const kills = sum("kill");
   const deaths = sum("death");
-  const paint = sum("paint");
-
-  const avgKill = battles.length ? kills / battles.length : 0;
-  const avgDeath = battles.length ? deaths / battles.length : 0;
-  const avgPaint = battles.length ? paint / battles.length : 0;
 
   const kd = deaths ? kills / deaths : kills;
 
@@ -268,17 +295,9 @@ function renderStats(){
   if(el){
     el.innerHTML = `
       <div class="card">
-        <b>総合</b><br>
         試合数: ${battles.length}<br>
         勝率: ${(battles.length ? wins/battles.length*100 : 0).toFixed(1)}%<br>
         K/D: ${kd.toFixed(2)}
-      </div>
-
-      <div class="card">
-        <b>平均</b><br>
-        平均キル: ${avgKill.toFixed(1)}<br>
-        平均デス: ${avgDeath.toFixed(1)}<br>
-        平均塗り: ${avgPaint.toFixed(1)}
       </div>
     `;
   }
@@ -305,8 +324,7 @@ function renderWeaponRank(){
     rate:v.win/v.total
   })).sort((a,b)=>b.rate-a.rate);
 
-  const el = document.getElementById("weaponRank");
-
+  const el=document.getElementById("weaponRank");
   if(el){
     el.innerHTML = arr.slice(0,5).map(x=>`
       <div class="card">
@@ -335,8 +353,7 @@ function renderStageRank(){
     rate:v.win/v.total
   })).sort((a,b)=>b.rate-a.rate);
 
-  const el = document.getElementById("stageRank");
-
+  const el=document.getElementById("stageRank");
   if(el){
     el.innerHTML = arr.slice(0,5).map(x=>`
       <div class="card">
@@ -345,30 +362,6 @@ function renderStageRank(){
       </div>
     `).join("");
   }
-}
-
-/* =====================
- トースト
-===================== */
-function showToast(text){
-
-  const t=document.createElement("div");
-  t.textContent=text;
-
-  t.style.cssText=`
-    position:fixed;
-    bottom:80px;
-    left:50%;
-    transform:translateX(-50%);
-    background:#22c55e;
-    color:white;
-    padding:10px 16px;
-    border-radius:8px;
-    z-index:9999;
-  `;
-
-  document.body.appendChild(t);
-  setTimeout(()=>t.remove(),1500);
 }
 
 /* =====================
