@@ -28,16 +28,10 @@ h1 { color:#38bdf8; }
 }
 
 /* ページ */
-.page {
-  display:none;
-  margin-top:10px;
-}
+.page { display:none; margin-top:10px; }
+.page.active { display:block; }
 
-.page.active {
-  display:block;
-}
-
-/* 中央入力 */
+/* 中央 */
 .center {
   max-width:400px;
   margin:0 auto;
@@ -68,31 +62,31 @@ button {
   color:white;
   border:none;
 }
+
+/* 削除ボタン */
+.deleteBtn {
+  width:auto;
+  padding:5px 10px;
+  background:#ef4444;
+  border:none;
+  color:white;
+  border-radius:5px;
+  font-size:12px;
+}
+
+/* トースト */
 .toast {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #22c55e;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  opacity: 0;
-  transition: 0.3s;
-  pointer-events: none;
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#22c55e;
+  padding:10px 20px;
+  border-radius:8px;
+  opacity:0;
+  transition:0.3s;
 }
 
 .toast.show {
-  opacity: 1;
-}
-
-.deleteBtn {
-  width: auto;
-  padding: 5px 10px;
-  margin-bottom: 5px;
-  background: #ef4444;
-  border: none;
-  color: white;
-  border-radius: 5px;
-  font-size: 12px;
+  opacity:1;
 }
