@@ -3,23 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Battle Log</title>
+<title>Battle Dashboard</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
-<div id="toast"></div>
-  
 <body>
 
 <header>
-  <h1>Battle Log</h1>
+  <h1>Battle Dashboard</h1>
 </header>
 
 <!-- タブ -->
 <div class="tabs">
   <button onclick="showTab('inputTab')">入力</button>
   <button onclick="showTab('listTab')">戦績</button>
-  <button onclick="showTab('statsTab')">統計</button>
+  <button onclick="showTab('statsTab')">分析</button>
 </div>
 
 <!-- 入力 -->
@@ -38,10 +36,10 @@
   <input id="kill" type="number" placeholder="キル">
   <input id="assist" type="number" placeholder="アシスト">
   <input id="death" type="number" placeholder="デス">
-  <input id="paint" type="number" placeholder="塗りポイント">
-  <input id="special" type="number" placeholder="スペシャル回数">
+  <input id="paint" type="number" placeholder="塗り">
+  <input id="special" type="number" placeholder="SP">
 
-  <button id="saveBtn">保存</button>
+  <button onclick="saveBattle()">保存</button>
 
 </section>
 
@@ -50,9 +48,17 @@
   <div id="list"></div>
 </section>
 
-<!-- 統計 -->
+<!-- 分析 -->
 <section id="statsTab" class="tab">
-  <div id="statsBox"></div>
+
+  <div class="card" id="summary"></div>
+
+  <h3>🏆 武器ランキング</h3>
+  <div id="weaponRank"></div>
+
+  <h3>🗺 ステージランキング</h3>
+  <div id="stageRank"></div>
+
 </section>
 
 <script src="app.js"></script>
