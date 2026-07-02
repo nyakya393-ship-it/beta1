@@ -1,7 +1,7 @@
 let battles = JSON.parse(localStorage.getItem("battles")) || [];
 
 /* =====================
- データ
+ バトル種類
 ===================== */
 const battleTypes = [
   "レギュラーマッチ",
@@ -15,6 +15,9 @@ const battleTypes = [
   "プライベートマッチ"
 ];
 
+/* =====================
+ ルール
+===================== */
 const rules = [
   "ナワバリバトル",
   "ガチエリア",
@@ -23,6 +26,9 @@ const rules = [
   "ガチアサリ"
 ];
 
+/* =====================
+ 武器
+===================== */
 const weapons = [
 
 /* =====================
@@ -139,48 +145,38 @@ const weapons = [
 "デンタルワイパーミント","デンタルワイパースミ"
 
 ];
+
+/* =====================
+ ステージ
+===================== */
 const stages = [
-  "ユノハナ大渓谷",
-  "ゴンズイ地区",
-  "ヤガラ市場",
-  "マテガイ放水路",
-  "ナンプラー遺跡",
-  "ナメロウ金属",
-  "クサヤ温泉",
-  "タラポートショッピングパーク",
-  "ヒラメが丘団地",
-  "マサバ海峡大橋",
-  "キンメダイ美術館",
-  "マヒマヒリゾート＆スパ",
-  "海女美術大学",
-  "チョウザメ造船",
-  "ザトウマーケット",
-  "スメーシーワールド",
-  "コンブトラック",
-  "マンタマリア号",
-  "タカアシ経済特区",
-  "オヒョウ海運",
-  "バイガイ亭",
-  "ネギトロ炭鉱",
-  "カジキ空港",
-  "リュウグウターミナル",
-  "デカライン高架下"
+
+  "ユノハナ大渓谷","ゴンズイ地区","ヤガラ市場","マテガイ放水路",
+
+  "ナメロウ金属","クサヤ温泉","ヒラメが丘団地","マサバ海峡大橋",
+
+  "キンメダイ美術館","マヒマヒリゾート＆スパ","海女美術大学",
+
+  "チョウザメ造船","ザトウマーケット","スメーシーワールド",
+
+  "コンブトラック","マンタマリア号","タカアシ経済特区",
+
+  "オヒョウ海運","バイガイ亭","ネギトロ炭鉱",
+
+  "カジキ空港","リュウグウターミナル","デカライン高架下"
+
 ];
 
 /* =====================
  タブ
 ===================== */
 function showTab(id) {
-
-  document.querySelectorAll(".tab").forEach(t => {
-    t.classList.remove("active");
-  });
-
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 }
 
 /* =====================
- 初期化
+ 初期化（ここが原因潰し）
 ===================== */
 window.addEventListener("DOMContentLoaded", () => {
 
@@ -194,8 +190,17 @@ window.addEventListener("DOMContentLoaded", () => {
   update();
 });
 
+/* =====================
+ セレクト生成
+===================== */
 function fill(id, arr) {
   const el = document.getElementById(id);
+
+  if (!el) {
+    console.error("missing select:", id);
+    return;
+  }
+
   arr.forEach(v => {
     const o = document.createElement("option");
     o.value = v;
@@ -226,6 +231,9 @@ function saveBattle() {
   update();
 }
 
+/* =====================
+ ヘルパー
+===================== */
 function v(id) {
   return document.getElementById(id)?.value || "";
 }
@@ -238,56 +246,24 @@ function n(id) {
  更新
 ===================== */
 function update() {
-  stats();
-  list();
-}
-
-/* =====================
- 統計
-===================== */
-function stats() {
-
-  const wins = battles.filter(b => b.result === "win").length;
-  const loses = battles.filter(b => b.result === "lose").length;
-
-  const kills = sum("kill");
-  const deaths = sum("death");
-  const paint = sum("paint");
-
-  const rate = battles.length ? (wins / battles.length) * 100 : 0;
-  const kd = deaths ? kills / deaths : kills;
-
-  set("total", battles.length);
-  set("wins", wins);
-  set("loses", loses);
-  set("rate", rate.toFixed(1) + "%");
-  set("kd", kd.toFixed(2));
-  set("avgPaint", battles.length ? (paint / battles.length).toFixed(1) : 0);
-}
-
-function sum(key) {
-  return battles.reduce((a,b)=>a+(b[key]||0),0);
-}
-
-function set(id, val) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = val;
+  renderList();
 }
 
 /* =====================
  一覧
 ===================== */
-function list() {
+function renderList() {
 
-  const el = document.getElementById("list");
-  el.innerHTML = "";
+  const list = document.getElementById("list");
+  list.innerHTML = "";
 
   battles.slice().reverse().forEach((b,i) => {
 
     const idx = battles.length - 1 - i;
 
     const div = document.createElement("div");
-    div.className = "card";
+    div.style.padding = "10px";
+    div.style.borderBottom = "1px solid #333";
 
     div.innerHTML = `
       <b>${b.weapon}</b><br>
@@ -298,7 +274,7 @@ function list() {
       <button onclick="del(${idx})">削除</button>
     `;
 
-    el.appendChild(div);
+    list.appendChild(div);
   });
 }
 
