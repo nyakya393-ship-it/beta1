@@ -1,68 +1,70 @@
 body {
   font-family: sans-serif;
-  background: #0b0f14;
-  color: white;
-  margin: 0;
-  padding: 10px;
+  background:#0b0f14;
+  color:white;
+  margin:0;
+  padding:10px;
 }
 
-h1 {
-  color: #38bdf8;
-}
+h1 { color:#38bdf8; }
 
-/* タブバー */
+/* タブ */
 .tabbar {
-  display: flex;
-  background: #111827;
-  border-radius: 8px;
-  overflow: hidden;
+  display:flex;
+  background:#111827;
+  border-radius:8px;
+  overflow:hidden;
 }
 
-.tabbar .tab {
-  flex: 1;
-  padding: 10px;
-  text-align: center;
-  cursor: pointer;
-  background: #111827;
+.tab {
+  flex:1;
+  padding:10px;
+  text-align:center;
+  cursor:pointer;
 }
 
-.tabbar .tab.active {
-  background: #22c55e;
+.tab.active {
+  background:#22c55e;
 }
 
 /* ページ */
 .page {
-  display: none;
-  margin-top: 10px;
+  display:none;
+  margin-top:10px;
 }
 
 .page.active {
-  display: block;
+  display:block;
+}
+
+/* 中央入力 */
+.center {
+  max-width:400px;
+  margin:0 auto;
 }
 
 /* カード */
 .card {
-  background: #111827;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 10px;
+  background:#111827;
+  padding:10px;
+  margin:10px 0;
+  border-radius:8px;
 }
 
 /* 入力 */
 select, input {
-  width: 100%;
-  margin: 5px 0;
-  padding: 10px;
-  font-size: 16px;
-  background: #0f172a;
-  color: white;
-  border: 1px solid #334155;
+  width:100%;
+  margin:5px 0;
+  padding:10px;
+  background:#0f172a;
+  color:white;
+  border:1px solid #334155;
 }
 
 button {
-  width: 100%;
-  padding: 10px;
-  background: #22c55e;
-  border: none;
-  color: white;
+  width:100%;
+  padding:10px;
+  background:#22c55e;
+  color:white;
+  border:none;
 }
