@@ -243,7 +243,7 @@ function saveBattle(){
   renderBattleList();
   renderAnalysis();
 
-  alert("保存できました");
+  showToast("保存できました");
 }
 
 /* =====================
@@ -426,3 +426,15 @@ window.onload = () => {
   renderAnalysis();
 
 };
+function showToast(text){
+
+  const toast = document.getElementById("toast");
+
+  toast.textContent = text;
+  toast.classList.add("show");
+
+  setTimeout(()=>{
+    toast.classList.remove("show");
+  }, 2000);
+
+}
