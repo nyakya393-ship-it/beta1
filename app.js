@@ -295,19 +295,17 @@ function renderAnalysis(){
       試合:${battles.length}<br>
       勝率:${valid.length?(wins/valid.length*100).toFixed(1):"0"}%<br>
       K/D:${kd.toFixed(2)}<br><br>
-　　　　キルレ: ${(avg("kill") / Math.max(avg("death"),1)).toFixed(2)}<br>
-    
+　　　　
       勝ち:${battles.filter(b=>b.result==="win").length}<br>
       負け:${battles.filter(b=>b.result==="lose").length}<br>
       切断:${battles.filter(b=>b.result==="disconnect").length}<br>
       無効:${battles.filter(b=>b.result==="invalid").length}<br>
 
-      🎯 平均<br>
-　　　　キル: ${avg("kill").toFixed(2)}<br>
-　　　　アシスト: ${avg("assist").toFixed(2)}<br>
-　　　　デス: ${avg("death").toFixed(2)}<br>
-　　　　塗り: ${avg("paint").toFixed(1)}<br>
-　　　　スペシャル: ${avg("special").toFixed(2)}<br>
+　　　　平均キル: ${avg("kill").toFixed(2)}<br>
+　　　　平均アシスト: ${avg("assist").toFixed(2)}<br>
+　　　　平均デス: ${avg("death").toFixed(2)}<br>
+　　　　平均塗り: ${avg("paint").toFixed(1)}<br>
+　　　　平均スペシャル: ${avg("special").toFixed(2)}<br>
 
     </div>
 
