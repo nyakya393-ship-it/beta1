@@ -35,11 +35,11 @@
     <option value="lose">負け</option>
   </select>
 
-  <input id="kill" type="number" placeholder="キル">
-  <input id="assist" type="number" placeholder="アシスト">
-  <input id="death" type="number" placeholder="デス">
-  <input id="paint" type="number" placeholder="塗り">
-  <input id="special" type="number" placeholder="SP">
+  <input id="kill" type="number" min="0" placeholder="キル">
+  <input id="assist" type="number" min="0" placeholder="アシスト">
+  <input id="death" type="number" min="0" placeholder="デス">
+  <input id="paint" type="number" min="0" placeholder="塗り">
+  <input id="special" type="number" min="0" placeholder="SP">
 
   <button onclick="saveBattle()">保存</button>
 
